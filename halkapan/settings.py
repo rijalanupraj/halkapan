@@ -131,3 +131,7 @@ STATIC_URL = '/static/'
 
 # Custom User Model
 AUTH_USER_MODEL = 'accounts.User'
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.AllowAllUsersModelBackend',
+    'accounts.backends.CustomUserModelBackend'
+)
