@@ -25,12 +25,13 @@
 
 <body>
 
+    <!-- Sidebar Component -->
+    {% include 'components/sidebar.html' %}
 
     <!-- Main Content -->
     {% block content %}
 
     {% endblock %}
-
 
     <!-- Including javascript -->
     {% include 'base/base_js.html' %}
