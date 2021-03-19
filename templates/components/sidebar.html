@@ -5,8 +5,6 @@
     </a>
   </div>
   <div class="side-inner">
-    <!-- Checking User is authenticated or not -->
-    {% if user.authenticated %}
     <div class="profile">
       <img src="#" alt="image description" class="img-fluid">
       <h3 class="name">Name</h3>
@@ -30,19 +28,35 @@
 
     </div>
 
-    {% else %}
-    <!-- Show something Here if the user is not login. Example: Logo -->
-    {% endif %}
     <div class="nav-menu">
       <ul>
+
+        </li>
         <li class="active"><a href="#"><span class="fa fa-home mr-3"></span>Feed</a></li>
         <li><a href="#"><span class="fa fa-search mr-3"></span>Explore</a></li>
         {% if not user.is_authenticated %}
         <li><a href="#"><span class="fa fa-key mr-3"></span>Login</a></li>
         <li><a href="#"><span class="fa fa-user mr-3"></span>Register</a></li>
-
+        {% else %}
+        <li><a href="#"><span class="fa fa-sign-out mr-3"></span>Logout</a></li>
 
         {% endif %}
+        <li class="accordion">
+          <a href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false"
+            aria-controls="collapseOne" class="collapsible">
+            <span class="fa fa-bomb mr-3"></span>Others
+          </a>
+
+          <div id="collapseOne" class="collapse" aria-labelledby="headingOne">
+            <div>
+              <ul>
+                <li><a href="#">Other 1</a></li>
+                <li><a href="#">Others 2</a></li>
+                <li><a href="#">Other 3</a></li>
+              </ul>
+            </div>
+          </div>
+
       </ul>
     </div>
   </div>
