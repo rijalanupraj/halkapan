@@ -128,7 +128,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
+    os.path.join(BASE_DIR, 'static'),
+
 ]
 
 # Custom User Model
@@ -140,3 +141,5 @@ AUTHENTICATION_BACKENDS = (
 
 LOGIN_URL = '/accounts/login'
 LOGOUT_URL = '/accounts/logout'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = LOGIN_URL

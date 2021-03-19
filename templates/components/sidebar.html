@@ -1,0 +1,50 @@
+<aside class="sidebar">
+  <div class="toggle">
+    <a href="#" class="burger js-menu-toggle" data-toggle="collapse" data-target="#main-navbar">
+      <span></span>
+    </a>
+  </div>
+  <div class="side-inner">
+    <!-- Checking User is authenticated or not -->
+    {% if user.authenticated %}
+    <div class="profile">
+      <img src="#" alt="image description" class="img-fluid">
+      <h3 class="name">Name</h3>
+      <span class="bio">Bio Here</span>
+    </div>
+
+    <div class="counter d-flex justify-content-center">
+      <div class="col">
+        <strong class="number">0</strong>
+        <span class="number-label">Posts</span>
+      </div>
+      <div class="col">
+        <strong class="number">0</strong>
+        <span class="number-label">Followers</span>
+      </div>
+      <div class="col">
+        <strong class="number">0</strong>
+        <span class="number-label">Following</span>
+      </div>
+      <!-- </div> -->
+
+    </div>
+
+    {% else %}
+    <!-- Show something Here if the user is not login. Example: Logo -->
+    {% endif %}
+    <div class="nav-menu">
+      <ul>
+        <li class="active"><a href="#"><span class="fa fa-home mr-3"></span>Feed</a></li>
+        <li><a href="#"><span class="fa fa-search mr-3"></span>Explore</a></li>
+        {% if not user.is_authenticated %}
+        <li><a href="#"><span class="fa fa-key mr-3"></span>Login</a></li>
+        <li><a href="#"><span class="fa fa-user mr-3"></span>Register</a></li>
+
+
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+
+</aside>
