@@ -42,7 +42,7 @@ body:before {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: rgba(0, 0, 0, 0.5);
     opacity: 0;
     visibility: hidden;
     -webkit-transition: 0.3s all ease-in-out;
@@ -97,7 +97,7 @@ aside .toggle {
 .show-sidebar aside .toggle .burger:before,
 .show-sidebar aside .toggle .burger span,
 .show-sidebar aside .toggle .burger:after {
-    background: #000;
+    background: #fff;
 }
 .show-sidebar aside {
     -webkit-box-shadow: 10px 0 30px 0 rgba(0, 0, 0, 0.1);
@@ -233,7 +233,7 @@ aside .side-inner .nav-menu ul li .collapsible[aria-expanded="true"]:after {
 
 main {
     width: calc(100%);
-    -webkit-transition: 1s -webkit-transform cubic-bezier(0.23, 1, 0.32, 1);
+    /* -webkit-transition: 1s -webkit-transform cubic-bezier(0.23, 1, 0.32, 1);
     transition: 1s -webkit-transform cubic-bezier(0.23, 1, 0.32, 1);
     -o-transition: 1s transform cubic-bezier(0.23, 1, 0.32, 1);
     transition: 1s transform cubic-bezier(0.23, 1, 0.32, 1);
@@ -243,7 +243,7 @@ main {
 .show-sidebar main {
     -webkit-transform: translateX(300px);
     -ms-transform: translateX(300px);
-    transform: translateX(300px);
+    transform: translateX(300px); */
 }
 
 /* Burger */
