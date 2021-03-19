@@ -29,11 +29,12 @@
     <!-- Sidebar Component -->
     {% include 'components/sidebar.html' %}
 
-    <!-- Main Content -->
-    {% block content %}
+    <main>
+        <!-- Main Content -->
+        {% block main_content %}
 
-    {% endblock %}
-
+        {% endblock %}
+    </main>
     <!-- Including javascript -->
     {% include 'base/base_js.html' %}
 
