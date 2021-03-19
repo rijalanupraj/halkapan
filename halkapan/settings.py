@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     # My apps
     'accounts',
 
+    # Other packages
+    'bootstrapform',
+
 ]
 
 MIDDLEWARE = [

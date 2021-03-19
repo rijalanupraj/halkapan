@@ -73,3 +73,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         """Return string representation of the user's username & email"""
         return f'{self.username} | {self.email}'
+
+    @property
+    def is_active(self):
+        return self.active
