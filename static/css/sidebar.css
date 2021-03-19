@@ -203,7 +203,9 @@ aside .side-inner .nav-menu ul li .collapsible {
     position: relative;
 }
 aside .side-inner .nav-menu ul li .collapsible:after {
-    content: "\e315";
+    content: "\f0d7";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
     font-size: 18px;
     position: absolute;
     right: 20px;
