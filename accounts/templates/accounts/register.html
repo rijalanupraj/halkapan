@@ -1,0 +1,70 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load bootstrap %}
+
+{% block title %} Register | HalkaPan {% endblock %}
+
+{% block additional_head %}
+<link rel="stylesheet" href="{% static 'accounts/css/login.css' %}">
+{% endblock %}
+
+
+{% block main_content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 centered">
+            <form class="myForm text-center" method="POST">
+                {% csrf_token %}
+                <header>Create New Account</header>
+                {% if form.errors %}
+                {% for field in form %}
+                {% for error in field.errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+                {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+                {% endfor %}
+                {% endif %}
+
+
+                <div class="form-group">
+                    <i class="fas fa-user"></i>
+                    {{form.email}}
+                </div>
+
+                <div class="form-group">
+                    <i class="fas fa-lock"></i>
+                    {{form.username}}
+                </div>
+
+                <div class="form-group">
+                    <i class="fas fa-lock"></i>
+                    {{form.password1}}
+                </div>
+                <div class="form-group">
+                    <i class="fas fa-lock"></i>
+                    {{form.password2}}
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <input id="check_1" name="check_1" type="checkbox" required><small> I read and
+                            agree to Terms & Conditions</small></input>
+                        <div class="invalid-feedback">You must check the box.</div>
+                    </label>
+                </div>
+
+                <button type="submit" class="butt">Register</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock main_content %}
