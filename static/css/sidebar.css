@@ -332,3 +332,16 @@ main {
 .burger:focus {
     outline: none;
 }
+.burger.active:before {
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=5);
+    /*for IE*/
+}
+
+.burger.active:after {
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=-5);
+    /*for IE*/
+}
