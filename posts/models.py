@@ -23,6 +23,32 @@ def upload_image_path(instance, filename):
     return f"posts/{new_filename}/{final_filename}"
 
 
+class PostQuerySet(models.query.QuerySet):
+    def featured(self):
+        return self.filter(featured=True, active=True, draft=False).distinct()
+
+    def active(self):
+        return self.filter(active=True, draft=False).distinct()
+
+    def draft(self):
+        return self.filter(draft=True)
+
+
+class PostManager(models.Manager):
+
+    def get_queryset(self):
+        return PostQuerySet(self.model, using=self._db)
+
+    def all(self):
+        return self.get_queryset().active()
+
+    def featured(self):
+        return self.get_queryset().featured()
+
+    def drafted(self):
+        return self.get_queryset().draft()
+
+
 class Post(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL,
                                on_delete=models.CASCADE)
@@ -36,6 +62,8 @@ class Post(models.Model):
     featured = models.BooleanField(default=False)
     image = models.ImageField(upload_to=upload_image_path,
                               null=True, blank=True)
+
+    objects = PostManager()
 
     def get_absolute_url(self):
         return reverse("posts:post-detail", kwargs={"slug": self.slug})
