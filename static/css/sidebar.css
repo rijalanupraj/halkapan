@@ -1,9 +1,21 @@
-a {
+.nav-menu a {
     -webkit-transition: 0.3s all ease;
     -o-transition: 0.3s all ease;
     transition: 0.3s all ease;
 }
 
+/* Make Burger closer to the top */
+a.burger {
+    top: 5px;
+    position: absolute;
+}
+
+/* Putting a Top Bar  */
+.top-head-bar {
+    background-color: #8b8b8b;
+    height: 45px;
+    position: fixed;
+}
 /* While Using sidebar is the other tags is not fully contain in body the overlay will be not added in the rest of the part */
 html {
     height: 100%;
@@ -16,15 +28,9 @@ p {
     color: #b3b3b3;
     font-weight: 300;
 }
-
-a {
-    -webkit-transition: 0.3s all ease;
-    -o-transition: 0.3s all ease;
-    transition: 0.3s all ease;
-}
-a,
-a:hover {
-    text-decoration: none !important;
+.nav-menu a,
+.nav-menu a:hover {
+    text-decoration: none;
 }
 
 h2 {
@@ -262,7 +268,7 @@ main {
     width: 100%;
     height: 2px;
     display: block;
-    background: #000;
+    background: #fff;
     border-radius: 2px;
     position: absolute;
     opacity: 1;
