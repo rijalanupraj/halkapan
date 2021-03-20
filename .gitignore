@@ -152,5 +152,5 @@ Thumbs.db #thumbnail cache on Windows
 # profiling data
 .prof
 
-#
-*_initial.py
+# Ignore Migrations Files
+*migrations/
