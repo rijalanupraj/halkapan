@@ -8,5 +8,6 @@ from . import views
 app_name = 'posts'
 
 urlpatterns = [
-
+    path('feed/', views.PostListView.as_view(), name='feed'),
+    path('<str:slug>/', views.PostDetailView.as_view(), name='post-detail')
 ]

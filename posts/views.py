@@ -1,3 +1,32 @@
+# External Import
 from django.shortcuts import render
+from django.views.generic import (
+    ListView,
+    DetailView
+)
 
-# Create your views here.
+# Internal Import
+from .models import Post
+
+
+class PostListView(ListView):
+    template_name = "posts/feed.html"
+    paginate_by = 2
+
+    def get_queryset(self):
+        request = self.request
+        return Post.objects.all()
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(PostListView, self).get_context_data(*args, **kwargs)
+        request = self.request
+        featured_post = Post.objects.featured()
+        context['featured_post'] = featured_post
+        print(context)
+        return context
+
+
+class PostDetailView(DetailView):
+    queryset = Post.objects.all()
+    template_name = "posts/post-detail.html"
+    slug_url_kwarg = 'slug'
