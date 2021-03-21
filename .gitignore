@@ -154,3 +154,6 @@ Thumbs.db #thumbnail cache on Windows
 
 # Ignore Migrations Files
 *migrations/
+
+# Ignore ItelliJ Files
+.idea/
