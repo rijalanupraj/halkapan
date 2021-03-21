@@ -26,6 +26,13 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.ImageField(
         upload_to=upload_image_path, null=True, blank=True)
+    following = models.ManyToManyField(
+        User, related_name='following', blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f"{self.user.username} Profile"
+
+    class Meta:
+        ordering = ('-updated',)
