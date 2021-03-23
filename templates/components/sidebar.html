@@ -5,11 +5,15 @@
     </a>
   </div>
   <div class="side-inner">
+    {% if user.is_authenticated %}
     <div class="profile">
-      <img src="#" alt="image description" class="img-fluid">
-      <h3 class="name">Name</h3>
+      {% if user.profile.image %}
+      <img src="{{user.profile.image.url}}" alt="image description" class="rounded-circle img-fluid p-3">
+      {% endif %}
+      <h3 class="name">{{user.username}}</h3>
       <span class="bio">Bio Here</span>
     </div>
+    {% endif %}
 
     <div class="counter d-flex justify-content-center">
       <div class="col">
@@ -17,11 +21,11 @@
         <span class="number-label">Posts</span>
       </div>
       <div class="col">
-        <strong class="number">0</strong>
+        <strong class="number">{{user.profile.user.followers.count}}</strong>
         <span class="number-label">Followers</span>
       </div>
       <div class="col">
-        <strong class="number">0</strong>
+        <strong class="number">{{user.profile.following.count}}</strong>
         <span class="number-label">Following</span>
       </div>
       <!-- </div> -->
@@ -65,4 +69,4 @@
 </aside>
 
 <!-- Top Head Bar - which will be stretch from left to right and will be fixed -->
-<div class="container-fluid top-head-bar"></div>
+<div class="container-fluid d-block top-head-bar"></div>
