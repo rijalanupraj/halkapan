@@ -10,19 +10,6 @@ a.burger {
     position: absolute;
 }
 
-/* Putting a Top Bar  */
-.top-head-bar {
-    background-color: #8b8b8b;
-    height: 45px;
-    position: fixed;
-}
-/* While Using sidebar is the other tags is not fully contain in body the overlay will be not added in the rest of the part */
-html {
-    height: 100%;
-}
-body {
-    min-height: 100%;
-}
 
 p {
     color: #b3b3b3;

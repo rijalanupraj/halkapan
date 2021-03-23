@@ -8,7 +8,7 @@
     {% if user.is_authenticated %}
     <div class="profile">
       {% if user.profile.image %}
-      <img src="{{user.profile.image.url}}" alt="image description" class="rounded-circle img-fluid p-3">
+      <img src="{{user.profile.image.url}}" alt="image description" class="img-fluid">
       {% endif %}
       <h3 class="name">{{user.username}}</h3>
       <span class="bio">Bio Here</span>
@@ -67,6 +67,3 @@
   </div>
 
 </aside>
-
-<!-- Top Head Bar - which will be stretch from left to right and will be fixed -->
-<div class="container-fluid d-block top-head-bar"></div>
