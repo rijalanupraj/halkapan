@@ -1,0 +1,6 @@
+/* Putting a Top Bar  */
+.top-head-bar {
+    background-color: #8b8b8b;
+    height: 45px;
+    position: fixed;
+}

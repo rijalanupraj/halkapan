@@ -12,7 +12,7 @@ class AllUserProfileListView(ListView):
     template_name = 'userprofile/all_user_profile.html'
 
     def get_queryset(self):
-        if self.request.user:
+        if self.request.user.is_authenticated:
             return models.Profile.objects.all().exclude(user=self.request.user)
         else:
             return models.Profile.objects.all()
