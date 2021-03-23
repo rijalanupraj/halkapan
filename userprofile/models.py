@@ -27,7 +27,7 @@ class Profile(models.Model):
     image = models.ImageField(
         upload_to=upload_image_path, null=True, blank=True)
     following = models.ManyToManyField(
-        User, related_name='following', blank=True)
+        User, related_name='followers', blank=True, symmetrical=False)
     created = models.DateTimeField(auto_now_add=True, blank=True)
     updated = models.DateTimeField(auto_now=True)
 
