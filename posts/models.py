@@ -4,6 +4,7 @@ from django.utils import timezone
 from django.db.models.signals import pre_save
 import os
 import random
+from django.db.models import Q
 
 # Create your models here.
 from .utils import unique_slug_generator
@@ -33,6 +34,10 @@ class PostQuerySet(models.query.QuerySet):
     def draft(self):
         return self.filter(draft=True)
 
+    def search(self, query):
+        lookups = Q(title__icontains=query)
+        return self.filter(lookups).distinct()
+
 
 class PostManager(models.Manager):
 
@@ -47,6 +52,9 @@ class PostManager(models.Manager):
 
     def drafted(self):
         return self.get_queryset().draft()
+
+    def search(self, query):
+        return self.get_queryset().active().search(query)
 
 
 class Post(models.Model):
