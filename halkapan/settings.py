@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'accounts',
     'posts',
     'userprofile',
+    'search',
 
     # Other packages
     'bootstrapform',

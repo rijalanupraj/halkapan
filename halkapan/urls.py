@@ -10,6 +10,7 @@ urlpatterns = [
     path('', include('accounts.urls')),
     path('', include('posts.urls')),
     path('', include('userprofile.urls')),
+    path('search/', include('search.urls')),
 ]
 
 if settings.DEBUG:
