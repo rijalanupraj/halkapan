@@ -13,7 +13,8 @@ class SearchPostListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         query = self.request.GET.get('q')
-        context["query"] = query
+        if query is not None:
+            context["query"] = query
         return context
 
     def get_queryset(self):
