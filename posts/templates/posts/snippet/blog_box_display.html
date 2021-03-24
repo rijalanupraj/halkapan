@@ -13,7 +13,7 @@
             <h5><a class="text-decoration-none" href="{{obj.get_absolute_url}}">{{obj.title}}</a>
             </h5>
             <ul class="pl-0">
-                <li><a href="#" class="fas fa-user text-decoration-none"> {% if obj.anonymous %} Anonymous {% else %}{{obj.author.username}}{% endif %}<a /></li>
+                <li><a href="#" class="fas fa-user text-decoration-none"> {% if obj.anonymous %} Anonymous {% else %}{{obj.author.user.username}}{% endif %}<a /></li>
                 <li><a class="fas fa-calendar text-decoration-none"> {{obj.timestamp|timesince}} ago</a></li>
             </ul>
         </div>
