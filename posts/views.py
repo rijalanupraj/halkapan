@@ -22,7 +22,6 @@ class ExplorePostListView(ListView):
         request = self.request
         featured_post = Post.objects.featured()
         context['featured_post'] = featured_post
-        print(context)
         return context
 
 
