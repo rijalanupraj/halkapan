@@ -1,3 +1,7 @@
+# External Import
 from django.contrib import admin
 
-# Register your models here.
+# Internal Import
+from .models import Tag
+
+admin.site.register(Tag)
