@@ -1,5 +1,4 @@
 from django.db import models
-from django.conf import settings
 from django.urls import reverse
 from django.utils import timezone
 from django.db.models.signals import pre_save
@@ -8,6 +7,7 @@ import random
 
 # Create your models here.
 from .utils import unique_slug_generator
+from userprofile.models import Profile
 
 
 def get_filename_ext(filepath):
@@ -50,7 +50,7 @@ class PostManager(models.Manager):
 
 
 class Post(models.Model):
-    author = models.ForeignKey(settings.AUTH_USER_MODEL,
+    author = models.ForeignKey(Profile,
                                on_delete=models.CASCADE)
     title = models.CharField(max_length=120)
     slug = models.SlugField(unique=True, blank=True, null=True)
