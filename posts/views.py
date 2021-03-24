@@ -9,8 +9,8 @@ from django.views.generic import (
 from .models import Post
 
 
-class PostListView(ListView):
-    template_name = "posts/feed.html"
+class ExplorePostListView(ListView):
+    template_name = "posts/explore.html"
     paginate_by = 2
 
     def get_queryset(self):
@@ -18,7 +18,7 @@ class PostListView(ListView):
         return Post.objects.all()
 
     def get_context_data(self, *args, **kwargs):
-        context = super(PostListView, self).get_context_data(*args, **kwargs)
+        context = super(ExplorePostListView, self).get_context_data(*args, **kwargs)
         request = self.request
         featured_post = Post.objects.featured()
         context['featured_post'] = featured_post

@@ -10,7 +10,6 @@ a.burger {
     position: absolute;
 }
 
-
 p {
     color: #b3b3b3;
     font-weight: 300;
@@ -51,8 +50,7 @@ body.show-sidebar:before {
     padding: 7rem 0;
 }
 
-aside,
-main {
+aside {
     height: 100vh;
     min-height: 580px;
 }
@@ -222,21 +220,6 @@ aside .side-inner .nav-menu ul li .collapsible[aria-expanded="true"]:after {
     -webkit-transform: rotate(90deg);
     -ms-transform: rotate(90deg);
     transform: rotate(90deg);
-}
-
-main {
-    width: calc(100%);
-    /* -webkit-transition: 1s -webkit-transform cubic-bezier(0.23, 1, 0.32, 1);
-    transition: 1s -webkit-transform cubic-bezier(0.23, 1, 0.32, 1);
-    -o-transition: 1s transform cubic-bezier(0.23, 1, 0.32, 1);
-    transition: 1s transform cubic-bezier(0.23, 1, 0.32, 1);
-    transition: 1s transform cubic-bezier(0.23, 1, 0.32, 1),
-        1s -webkit-transform cubic-bezier(0.23, 1, 0.32, 1);
-}
-.show-sidebar main {
-    -webkit-transform: translateX(300px);
-    -ms-transform: translateX(300px);
-    transform: translateX(300px); */
 }
 
 /* Burger */
