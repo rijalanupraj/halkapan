@@ -1,0 +1,35 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}
+HalkaPan
+{% endblock %}
+
+{% block additional_head %}
+<link rel="stylesheet" href="{% static 'posts/blog_box_display.css' %}">
+{% endblock %}
+
+{% block main_content %}
+<div class="explore container mt-4">
+    <div class="p-1 bg-light col-lg-8 mx-auto rounded rounded-pill shadow-sm mb-4">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <button id="button-addon2" type="submit" class="btn btn-link text-warning"><i
+                        class="fa fa-search"></i></button>
+            </div>
+            <input type="search" placeholder="What're you searching for?" aria-describedby="button-addon2"
+                class="form-control border-0 bg-light">
+        </div>
+    </div>
+
+    <div class="blog__list mx-auto">
+        <div class="row">
+            {% include 'posts/snippet/blog_box_display.html' %}
+            {% include 'posts/snippet/blog_box_display.html' %}
+            {% include 'posts/snippet/blog_box_display.html' %}
+            {% include 'posts/snippet/blog_box_display.html' %}
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
