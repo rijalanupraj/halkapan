@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Title Tag -->
+    <title>
+        {% block title %}
+
+        {% endblock %}
+    </title>
+
+    <!-- Including css -->
+    {% include 'base/base_css.html' %}
+
+    <!-- Content for Page Specific head -->
+    {% block additional_head %}
+
+    {% endblock %}
+
+</head>
+
+<body>
+
+    <!-- Sidebar Component -->
+    {% include 'myadmin/components/admin-sidebar.html' %}
+    <!-- Top Head Bar - which will be stretch from left to right and will be fixed -->
+    <div class="container-fluid d-block top-head-bar"></div>
+    <main class="pt-5">
+        <!-- Main Content -->
+        {% block main_content %}
+
+        {% endblock %}
+    </main>
+    <!-- Including javascript -->
+    {% include 'base/base_js.html' %}
+
+    <!-- Content for Page Specific Extra content like:javascript -->
+    {% block additional_body %}
+
+    {% endblock %}
+
+</body>
+
+</html>
