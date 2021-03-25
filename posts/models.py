@@ -65,7 +65,7 @@ class Post(models.Model):
     content = models.TextField()
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
     timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
-    active = models.BooleanField(default=False)
+    active = models.BooleanField(default=True)
     draft = models.BooleanField(default=False)
     featured = models.BooleanField(default=False)
     anonymous = models.BooleanField(default=False)
