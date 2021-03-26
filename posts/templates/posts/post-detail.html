@@ -12,6 +12,14 @@
             <p class="lead">By {{object.author.user.username}}</p>
             <hr>
             <p>Posted on {{object.timestamp | date:'d M, Y'}}</p>
+            {% if object.author.user == request.user %}
+            <form method="POST" action="{% url 'posts:post-delete' object.slug %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <button class="btn btn-outline-danger" type="submit">Delete</button>
+                </div>
+            </form>
+            {% endif %}
             <hr>
             {{object.content}}
 
@@ -20,10 +28,10 @@
                 <div class="card-body">
                     <form action="">
                         <div class="form-group">
-                        <textarea class="form-control" name="comment" id="" rows="3">
+                            <textarea class="form-control" name="comment" id="" rows="3">
 
                         </textarea>
-                    </div>
+                        </div>
                         <button type="submit" class="btn btn-success">Comment</button>
                     </form>
                 </div>
