@@ -47,6 +47,7 @@ INSTALLED_APPS = [
 
     # Other packages
     'bootstrapform',
+    'ckeditor',
 
 ]
 
