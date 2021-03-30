@@ -5,6 +5,7 @@ from django.db.models.signals import pre_save
 import os
 import random
 from django.db.models import Q
+from ckeditor.fields import RichTextField
 
 # Create your models here.
 from .utils import unique_slug_generator
@@ -62,7 +63,7 @@ class Post(models.Model):
                                on_delete=models.CASCADE)
     title = models.CharField(max_length=120)
     slug = models.SlugField(unique=True, blank=True, null=True)
-    content = models.TextField()
+    content = RichTextField()
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
     timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
     active = models.BooleanField(default=True)
