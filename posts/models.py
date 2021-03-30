@@ -71,14 +71,19 @@ class Post(models.Model):
     anonymous = models.BooleanField(default=False)
     image = models.ImageField(upload_to=upload_image_path,
                               null=True, blank=True)
+    likes = models.ManyToManyField(
+        Profile, related_name='likes')
 
     objects = PostManager()
+
+    def __str__(self):
+        return self.title
 
     def get_absolute_url(self):
         return reverse("posts:post-detail", kwargs={"slug": self.slug})
 
-    def __str__(self):
-        return self.title
+    def get_number_of_likes(self):
+        return self.likes.count()
 
 
 def post_pre_save_receiver(sender, instance, *args, **kwargs):
