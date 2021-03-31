@@ -1,0 +1,47 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}
+Users | HalkaPan
+{% endblock %}
+{% block additional_head %}
+<link rel="stylesheet" href="{% static 'userprofile/css/author-page.css' %}">
+<link rel="stylesheet" href="{% static 'posts/css/blog_box_display.css' %}">
+{% endblock %}
+
+{% block main_content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8 col-md-offset-2">
+            <div class="mainheading">
+                <div class="row post-top-meta authorpage">
+                    <div class="col-md-10 col-xs-12">
+                        <h1>{{object.user.username}}</h1>
+                        <span class="author-description">Write about the user here haha he he he eheh eeh</span><br>
+
+                        <a href="" class="btn follow">Follow</a>
+                    </div>
+                    <div class="col-md-2 col-xs-12">
+                        <img class="author-thumb" src="{{object.image.url}}" alt="{{object.user.username}} Profile">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="graybg authorpage">
+    <div class="container">
+        <div class="row">
+            {% for post in user_posts %}
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                {% include 'posts/snippets/blog_box_display.html' with obj=post%}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

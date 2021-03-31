@@ -39,17 +39,17 @@
 .blog-detail-page span.post-read {
     color: rgba(0, 0, 0, 0.44);
 }
-.blog-detail-page span.post-read-more {
+.blog-detail-page span.post-read-save {
     align-items: center;
     display: inline-block;
     float: right;
     margin-top: 8px;
 }
-.blog-detail-page span.post-read-more a {
+.blog-detail-page span.post-read-save a {
     color: rgba(0, 0, 0, 0.44);
 }
 .blog-detail-page span.post-name a,
-.blog-detail-page span.post-read-more a:hover {
+.blog-detail-page span.post-read-save a:hover {
     color: rgba(0, 0, 0, 0.8);
 }
 .blog-detail-page .dot:after {
