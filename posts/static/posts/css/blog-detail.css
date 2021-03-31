@@ -1,0 +1,118 @@
+.blog-detail-page .mainheading {
+    padding: 1rem 0rem;
+}
+
+.blog-detail-page .author-thumb {
+    width: 40px;
+    height: 40px;
+    float: left;
+    margin-right: 13px;
+    border-radius: 100%;
+}
+
+.blog-detail-page .post-top-meta {
+    margin-bottom: 2rem;
+}
+.blog-detail-page .post-top-meta .author-thumb {
+    width: 72px;
+    height: 72px;
+}
+.blog-detail-page .post-top-meta.authorpage .author-thumb {
+    margin-top: 40px;
+}
+.blog-detail-page post-top-meta span {
+    font-size: 0.9rem;
+    color: rgba(0, 0, 0, 0.44);
+    display: inline-block;
+}
+.blog-detail-page .post-top-meta .author-description {
+    margin-bottom: 5px;
+    margin-top: 5px;
+    font-size: 0.95rem;
+}
+.blog-detail-page span.post-name,
+.blog-detail-page span.post-date,
+.blog-detail-page span.author-meta {
+    display: inline-block;
+}
+.blog-detail-page span.post-date,
+.blog-detail-page span.post-read {
+    color: rgba(0, 0, 0, 0.44);
+}
+.blog-detail-page span.post-read-more {
+    align-items: center;
+    display: inline-block;
+    float: right;
+    margin-top: 8px;
+}
+.blog-detail-page span.post-read-more a {
+    color: rgba(0, 0, 0, 0.44);
+}
+.blog-detail-page span.post-name a,
+.blog-detail-page span.post-read-more a:hover {
+    color: rgba(0, 0, 0, 0.8);
+}
+.blog-detail-page .dot:after {
+    content: "·";
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+.blog-detail-page .link-dark {
+    color: rgba(0, 0, 0, 0.8);
+}
+.blog-detail-page .article-post {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: rgba(0, 0, 0, 0.8);
+}
+
+.blog-detail-page .article-post p {
+    margin: 0 0 1.5rem 0;
+}
+.blog-detail-page .featured-image {
+    display: block;
+    margin: 0px auto;
+    margin-bottom: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+    .blog-detail-page .post-top-meta .col-md-10 {
+        text-align: center;
+    }
+}
+
+.blog-detail-page ul.tags {
+    list-style: none;
+    padding-left: 0;
+    margin: 0 0 3rem 0;
+}
+.blog-detail-page ul.tags li {
+    display: inline-block;
+    font-size: 0.9rem;
+}
+.blog-detail-page ul.tags li a {
+    background: rgba(0, 0, 0, 0.05);
+    color: rgba(0, 0, 0, 0.6);
+    border-radius: 3px;
+    padding: 5px 10px;
+}
+.blog-detail-page ul.tags li a:hover {
+    background: rgba(0, 0, 0, 0.07);
+    text-decoration: none;
+}
+
+.blog-detail-page .btn.follow {
+    border-color: #02b875;
+    color: #1c9963;
+    padding: 3px 10px;
+    text-align: center;
+    border-radius: 999em;
+    font-size: 0.85rem;
+    display: inline-block;
+}
+
+.blog-detail-page .post-top-meta .btn.follow {
+    margin-left: 5px;
+    margin-top: -4px;
+}

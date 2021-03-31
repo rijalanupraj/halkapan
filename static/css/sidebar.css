@@ -10,7 +10,7 @@ a.burger {
     position: absolute;
 }
 
-p {
+.sidebar p {
     color: #b3b3b3;
     font-weight: 300;
 }
