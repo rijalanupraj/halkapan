@@ -26,18 +26,32 @@ Users | HalkaPan
                                 <span class="number-label">Posts</span>
                             </div>
                             <div class="col">
-                                <strong class="number">{{object.user.profile.user.followers.count}}</strong>
+                                <strong class="number"
+                                    id="author-follower-number">{{object.user.profile.user.followers.count}}</strong>
                                 <span class="number-label">Followers</span>
                             </div>
                             <div class="col">
-                                <strong class="number">{{object.user.profile.following.count}}</strong>
+                                <strong class="number following-number">{{object.user.profile.following.count}}</strong>
                                 <span class="number-label">Following</span>
                             </div>
 
                         </div>
                         <hr>
-                        <a href="" class="btn follow">Follow</a>
+                        {% if user.is_authenticated %}
+                        <a role="button" type="button" id="follow-toggle"
+                            href="{% url 'userprofile:follow-toggle' object.user.username %}"
+                            class="btn btn-primary">
+                            {% if user_follows %}
+                            Unfollow
+                            {% else %}
+                            Follow
+                            {% endif %}</a>
 
+                        {% else %}
+                        <a role="button" type="button"
+                            href="{% url 'accounts:login' %}?next=/users/{{object.user.username}}"
+                            class="btn btn-primary">Follow</a>
+                        {% endif %}
                     </div>
                     <div class="col-md-2 col-xs-12">
                         <img class="author-thumb" src="{{object.image.url}}" alt="{{object.user.username}} Profile">
@@ -61,4 +75,33 @@ Users | HalkaPan
     </div>
 </div>
 
+{% endblock %}
+
+{% block additional_body %}
+<script>
+    $("#follow-toggle").click(function (e) {
+        e.preventDefault();
+        var href = this.href
+        var author_follower_number = $("#author-follower-number").text();
+        var currentuser_following_number = $("#currentuser-following-number").text();
+        console.log(author_follower_number)
+        $.ajax({
+            url: href,
+            success: function (response) {
+                if (response["following"]) {
+                    $("#follow-toggle").html("Unfollow");
+                    author_follower_number++;
+                    currentuser_following_number++;
+                } else {
+                    $("#follow-toggle").html("Follow");
+                    author_follower_number--;
+                    currentuser_following_number--;
+                }
+                console.log(author_follower_number)
+                $("#author-follower-number").html(author_follower_number);
+                $("#currentuser-following-number").html(currentuser_following_number);
+            }
+        })
+    })
+</script>
 {% endblock %}
