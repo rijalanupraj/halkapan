@@ -1,46 +1,70 @@
 {% extends 'base/base.html' %}
 {% load static %}
 {% block title %}
-{{obj.title}}|HalkaPan
+{{object.title}} | HalkaPan
+{% endblock %}
+
+{% block additional_head %}
+<link rel="stylesheet" href="{% static 'posts/css/blog-detail.css' %}">
 {% endblock %}
 
 {% block main_content %}
 <div class="container mt-4">
-    <div class="row">
-        <div class="col-lg-8 mx-auto">
-            <h1 class="mt-4">{{object.title}}</h1>
-            <p class="lead">By {{object.author.user.username}}</p>
-            <hr>
-            <p>Posted on {{object.timestamp | date:'d M, Y'}}</p>
-            {% if object.author.user == request.user %}
-            <form method="POST" class="delete-post-form" action="{% url 'posts:post-delete' object.slug %}">
-                {% csrf_token %}
-                <div class="form-group">
-                    <button class="btn btn-outline-danger confirm-delete-post" type="submit">Delete</button>
-                </div>
-            </form>
-            {% endif %}
-            <hr>
-            {{object.content | safe}}
+    <div class="row blog-detail-page">
+        <div class="col-lg-8 col-md-10 col-md-offset-2 mx-auto col-xs-12">
+            <div class="mainheading">
 
-            <div class="card my-4">
-                <h5 class="card-header">Leave a Comment:</h5>
-                <div class="card-body">
-                    <form action="">
-                        <div class="form-group">
-                            <textarea class="form-control" name="comment" id="" rows="3">
+                <div class="row post-top-meta">
+                    {% if not object.anonymous %}
+                    <div class="col-12 m-2 m-sm-0 col-sm-2">
+                        <a href=""><img class="author-thumb" src="{{object.author.image.url}}"
+                                alt="{{object.author.user.username}}"></a>
 
-                        </textarea>
+                    </div>
+                    <div class="col-12 col-sm-10">
+                        <a class="link-dark" href="author.html">{{object.author.user.username}}</a><a href="#"
+                            class="btn follow">Follow</a><br>
+                        <span class="author-description">
+                            User bio here</span><br>
+                        {% else %}
+                        <div class="col-md-2">
+                            <img class="author-thumb"
+                                src="{% static 'userprofile/img/anonymous-user-profile-pic.png' %}" alt="">
                         </div>
-                        <button type="submit" class="btn btn-success">Comment</button>
-                    </form>
+                        <div class="col-md-10">
+                            <a class="link-dark">Anonymous User</a><br>
+                            {% endif %}
+                            <span class="post-date">{{object.timestamp | date:'d M, Y'}}</span><span
+                                class="dot"></span><span class="post-read">10
+                                min read</span>
+                        </div>
+                    </div>
+
+                    <h1 class="posttitle">{{object.title}}</h1>
+
                 </div>
+                {% if object.image %}
+                <img class="featured-image img-fluid" src="{{object.image.url}}" alt="">
+                {% endif %}
+                <div class="article-post">
+                    {{object.content | safe}}
+                </div>
+
+                <div class="after-post-tags">
+                    <ul class="tags">
+                        {% for tag in object.tag_set.all %}
+                        <li><a href="">{{tag}}</a></li>
+
+                        {% endfor %}
+
+                    </ul>
+                </div>
+
             </div>
         </div>
     </div>
-</div>
-{% endblock %}
+    {% endblock %}
 
-{% block additional_body %}
-<script src="{% static 'posts/js/confirm-delete.js' %}"></script>
-{% endblock %}
+    {% block additional_body %}
+    <script src="{% static 'posts/js/confirm-delete.js' %}"></script>
+    {% endblock %}
