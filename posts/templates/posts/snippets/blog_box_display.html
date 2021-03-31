@@ -1,17 +1,41 @@
 <div class="col-lg-4 col-md-4 col-sm6">
-    <div class="blog__item">
-        <div class="blog__item__pic">
-            {% if obj.image %}
-            <img class="img-fluid" src="{{obj.image.url}}" alt="{{obj.image.title}}" srcset="">
-            {% endif %}
-        </div>
-        <div class="blog__item__text">
-            <h5><a class="text-decoration-none" href="{{obj.get_absolute_url}}">{{obj.title}}</a>
-            </h5>
-            <ul class="pl-0">
-                <li><a href="#" class="fas fa-user text-decoration-none"> {% if obj.anonymous %} Anonymous {% else %}{{obj.author.user.username}}{% endif %}<a /></li>
-                <li><a class="fas fa-calendar text-decoration-none"> {{obj.timestamp|timesince}} ago</a></li>
-            </ul>
+    <div class="card-post-list">
+        {% if obj.image %}
+        <a href="{{obj.get_absolute_url}}">
+            <img class="img-fluid mx-auto d-block" src="{{obj.image.url}}" alt="">
+        </a>
+        {% endif %}
+        <div class="card-block">
+            <h2 class="card-title"><a href="{{obj.get_absolute_url}}">{{obj.title}}</a>
+            </h2>
+            <h4 class="card-text">Little info goes here</h4>
+            <div class="metafooter">
+                <div class="wrapfooter">
+                    <span class="meta-footer-thumb">
+                        {% if not obj.anonymous %}
+                        <a href=""><img class="author-thumb" src="{{ obj.author.image.url }}"
+                                alt="{{obj.author.user.username}}"></a>
+
+                        {% else %}
+                        <i class="fas fa-user-ninja fa-3x author-thumb"></i>
+                        {% endif %}
+                    </span>
+                    <span class="author-meta">
+                        {% if not obj.anonymous %}
+                        <span class="post-name"><a href="">{{obj.author.user.username}}</a></span>
+                        {% else %}
+                        <span class="post-name"><a>Anonymous</a></span>
+
+                        {% endif %}
+                        <br />
+                        <span class="post-date">{{obj.timestamp | date:'d M, Y'}}</span><span class="dot"></span><span
+                            class="post-read">10
+                            min read</span>
+                    </span>
+                    <span class="post-read-save"><a href="" title="Read Story"><i
+                                class="fas fa-bookmark fa-2x"></i></a></span>
+                </div>
+            </div>
         </div>
     </div>
 </div>

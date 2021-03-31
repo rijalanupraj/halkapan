@@ -1,41 +1,74 @@
-.blog__list .blog__item {
-    margin-bottom: 60px;
-    background-color: white;
-    border-radius: 5px;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.12),
-        0 4px 4px rgba(0, 0, 0, 0.12), 0 8px 8px rgba(0, 0, 0, 0.12),
-        0 16px 16px rgba(0, 0, 0, 0.12);
+.card-post-list {
+    margin-bottom: 20px;
+    border-radius: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
 }
 
-.blog__list .blog__item__text {
-    padding: 25px 0px 5px 10px;
+.card-post-list .card-block{
+    padding: 20px;
 }
-
-.blog__list .blog__item__text ul {
-    margin-bottom: 25px;
-}
-
-.blog__list .blog__item__text ul li {
-    list-style: none;
-    display: inline-block;
-    margin-right: 15px;
-}
-
-.blog__list .blog__item__text ul li a {
-    font-size: 13px;
-    color: #c3c3c3;
-}
-
-.blog__list .blog__item__text ul li:last-child {
-    margin-right: 0;
-}
-
-.blog__list .blog__item__text h5 {
-    margin-bottom: 12px;
-}
-
-.blog__list .blog__item__text h5 a {
-    font-size: 20px;
-    color: #1c1c1c;
+.card-post-list h2.card-title {
+    font-size: 1.3rem;
     font-weight: 700;
+    line-height: 1.25;
+}
+.card-post-list h2.card-title a {
+    color: rgba(0, 0, 0, 0.8);
+}
+.card-post-list h2.card-title a:hover {
+    color: rgba(0, 0, 0, 0.6);
+    text-decoration: none;
+}
+.card-post-list h4.card-text {
+    color: rgba(0, 0, 0, 0.44);
+    font-size: 0.95rem;
+    line-height: 1.4;
+    font-weight: 400;
+}
+
+.card-post-list .wrapfooter {
+    font-size: 12px;
+    margin-top: 30px;
+}
+.card-post-list .author-thumb {
+    width: 40px;
+    height: 40px;
+    float: left;
+    margin-right: 13px;
+    border-radius: 100%;
+}
+
+.card-post-list .author-meta {
+    flex: 1 1 auto;
+    white-space: nowrap !important;
+    text-overflow: ellipsis !important;
+    overflow: hidden !important;
+}
+.card-post-list span.post-name,
+.card-post-list span.post-date,
+.card-post-list span.author-meta {
+    display: inline-block;
+}
+.card-post-list span.post-date,
+.card-post-list span.post-read {
+    color: rgba(0, 0, 0, 0.44);
+}
+.card-post-list span.post-read-save {
+    align-items: center;
+    display: inline-block;
+    float: right;
+    margin-top: 8px;
+}
+.card-post-list span.post-read-save a {
+    color: rgba(0, 0, 0, 0.44);
+}
+.card-post-list span.post-name a,
+.card-post-list span.post-read-save a:hover {
+    color: rgba(0, 0, 0, 0.8);
+}
+.card-post-list .dot:after {
+    content: "·";
+    margin-left: 3px;
+    margin-right: 3px;
 }
