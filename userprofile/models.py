@@ -25,7 +25,7 @@ def upload_image_path(instance, filename):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.ImageField(
-        upload_to=upload_image_path, null=True, blank=True)
+        upload_to=upload_image_path, default="user/profile_pics/default-profile-picture.jpg")
     following = models.ManyToManyField(
         User, related_name='followers', blank=True, symmetrical=False)
     created = models.DateTimeField(auto_now_add=True, blank=True)
