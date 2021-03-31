@@ -19,8 +19,25 @@ Users | HalkaPan
                     <div class="col-md-10 col-xs-12">
                         <h1>{{object.user.username}}</h1>
                         <span class="author-description">Write about the user here haha he he he eheh eeh</span><br>
+                        <hr>
+                        <div class="counter d-flex justify-content-center">
+                            <div class="col">
+                                <strong class="number">{{object.user.profile.post_set.all.count}}</strong>
+                                <span class="number-label">Posts</span>
+                            </div>
+                            <div class="col">
+                                <strong class="number">{{object.user.profile.user.followers.count}}</strong>
+                                <span class="number-label">Followers</span>
+                            </div>
+                            <div class="col">
+                                <strong class="number">{{object.user.profile.following.count}}</strong>
+                                <span class="number-label">Following</span>
+                            </div>
 
+                        </div>
+                        <hr>
                         <a href="" class="btn follow">Follow</a>
+
                     </div>
                     <div class="col-md-2 col-xs-12">
                         <img class="author-thumb" src="{{object.image.url}}" alt="{{object.user.username}} Profile">
