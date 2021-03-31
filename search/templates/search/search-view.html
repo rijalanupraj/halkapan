@@ -19,7 +19,9 @@ HalkaPan
     <div class="blog__list mx-auto">
         <div class="row">
             {% for post in object_list %}
-            {% include 'posts/snippets/blog_box_display.html' with obj=post%}
+            <div class="col-lg-4 col-md-6 col-sm-6">
+                {% include 'posts/snippets/blog_box_display.html' with obj=post%}
+            </div>
             {% endfor %}
         </div>
     </div>
