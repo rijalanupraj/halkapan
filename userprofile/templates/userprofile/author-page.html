@@ -39,8 +39,7 @@ Users | HalkaPan
                         <hr>
                         {% if user.is_authenticated %}
                         <a role="button" type="button" id="follow-toggle"
-                            href="{% url 'userprofile:follow-toggle' object.user.username %}"
-                            class="btn btn-primary">
+                            href="{% url 'userprofile:follow-toggle' object.user.username %}" class="btn btn-primary">
                             {% if user_follows %}
                             Unfollow
                             {% else %}
@@ -78,30 +77,5 @@ Users | HalkaPan
 {% endblock %}
 
 {% block additional_body %}
-<script>
-    $("#follow-toggle").click(function (e) {
-        e.preventDefault();
-        var href = this.href
-        var author_follower_number = $("#author-follower-number").text();
-        var currentuser_following_number = $("#currentuser-following-number").text();
-        console.log(author_follower_number)
-        $.ajax({
-            url: href,
-            success: function (response) {
-                if (response["following"]) {
-                    $("#follow-toggle").html("Unfollow");
-                    author_follower_number++;
-                    currentuser_following_number++;
-                } else {
-                    $("#follow-toggle").html("Follow");
-                    author_follower_number--;
-                    currentuser_following_number--;
-                }
-                console.log(author_follower_number)
-                $("#author-follower-number").html(author_follower_number);
-                $("#currentuser-following-number").html(currentuser_following_number);
-            }
-        })
-    })
-</script>
+<script src="{% static 'userprofile/js/follow-toggle.js' %}"></script>
 {% endblock %}
