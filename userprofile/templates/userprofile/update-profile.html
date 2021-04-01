@@ -1,0 +1,24 @@
+{% extends 'base/base.html' %}
+{% load bootstrap %}
+
+{% block title %}
+Update Profile | HalkaPan
+{% endblock %}
+
+{% block main_content %}
+
+<div class="col-sm-8 col-md-8 container">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Edit Profile</legend>
+            {{ u_form | bootstrap_horizontal }}
+            {{p_form | bootstrap_horizontal }}
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-info" type="submit">Update</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

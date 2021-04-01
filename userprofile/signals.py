@@ -3,6 +3,7 @@ from django.db.models.signals import post_save, pre_save
 from django.conf import settings
 from django.dispatch import receiver
 import os
+import time
 
 # Internal Import
 from .models import Profile
@@ -25,13 +26,12 @@ def save_profile(sender, instance, **kwargs):
 def delete_old_file(sender, instance, **kwargs):
     if instance._state.adding and not instance.pk:
         return False
-
     try:
         old_image = sender.objects.get(pk=instance.pk).image
     except sender.DoesNotExist:
         return False
-
-    if os.path.isfile(old_image.path):
-        if not "default-profile-picture.jpg" in old_image.path:
-            os.remove(old_image.path)
-            print("removed")
+    new_image = instance.image
+    if not old_image == new_image:
+        if os.path.isfile(old_image.path):
+            if not "default-profile-picture.jpg" in old_image.path:
+                os.remove(old_image.path)

@@ -1,5 +1,5 @@
 # External Import
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
 from django.views.generic import ListView, DetailView
 from django.contrib.auth import get_user_model
 import json
@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 # Internal Import
 from . import models
 from posts.models import Post
+from .forms import UserUpdateForm, ProfileUpdateForm
 
 User = get_user_model()
 
@@ -37,7 +38,6 @@ class AuthorDetailView(DetailView):
     def get_context_data(self, *args, **kwargs):
         context = super(AuthorDetailView, self).get_context_data(
             *args, **kwargs)
-        print(context)
         request = self.request
         username = self.kwargs['username']
         author = User.objects.get(username=username)
@@ -68,3 +68,26 @@ def follow_toggle(request, username):
 
     response = json.dumps(resp)
     return HttpResponse(response, content_type="application/json")
+
+
+@login_required
+def update_profile(request):
+    if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = ProfileUpdateForm(
+            request.POST, request.FILES, instance=request.user.profile)
+
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            return redirect('accounts:login')
+
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.profile)
+
+    context = {
+        'u_form': u_form,
+        'p_form': p_form,
+    }
+    return render(request, 'userprofile/update-profile.html', context)

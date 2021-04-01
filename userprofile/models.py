@@ -16,11 +16,9 @@ def get_filename_ext(filepath):
 
 
 def upload_image_path(instance, filename):
-    print(instance.user.username)
     username = instance.user.username
     name, ext = get_filename_ext(filename)
     final_filename = f'profile-picture{ext}'
-    print(f"user/profile_pics/{username}/{final_filename}")
     return f"user/profile_pics/{username}/{final_filename}"
 
 
@@ -28,6 +26,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.ImageField(
         upload_to=upload_image_path, default="user/profile_pics/default-profile-picture.jpg")
+    bio = models.CharField(max_length=250, blank=True, null=True)
     following = models.ManyToManyField(
         User, related_name='followers', blank=True, symmetrical=False)
     created = models.DateTimeField(auto_now_add=True, blank=True)
