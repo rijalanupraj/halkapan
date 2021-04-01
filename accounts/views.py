@@ -18,7 +18,6 @@ def register(request):
         user = form.save(commit=False)
         user.active = False
         user.save()
-        print("hello")
         return redirect("accounts:login")
 
     return render(request, 'accounts/register.html', {'form': form})
