@@ -16,10 +16,12 @@ def get_filename_ext(filepath):
 
 
 def upload_image_path(instance, filename):
-    new_filename = random.randint(1, 3910209312)
+    print(instance.user.username)
+    username = instance.user.username
     name, ext = get_filename_ext(filename)
-    final_filename = f'{new_filename}{ext}'
-    return f"user/profile_pics/{new_filename}/{final_filename}"
+    final_filename = f'profile-picture{ext}'
+    print(f"user/profile_pics/{username}/{final_filename}")
+    return f"user/profile_pics/{username}/{final_filename}"
 
 
 class Profile(models.Model):
