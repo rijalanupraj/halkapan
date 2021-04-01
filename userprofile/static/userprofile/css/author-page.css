@@ -66,7 +66,7 @@ span.author-meta {
     position: relative;
 }
 
-.btn.follow {
+/* .btn#follow-toggle {
     border-color: #02b875;
     color: #1c9963;
     padding: 3px 10px;
@@ -74,12 +74,7 @@ span.author-meta {
     border-radius: 999em;
     font-size: 0.85rem;
     display: inline-block;
-}
-
-.post-top-meta .btn.follow {
-    margin-left: 5px;
-    margin-top: -4px;
-}
+} */
 
 .authorpage h1 {
     font-weight: 700;

@@ -1,13 +1,15 @@
 # External Import
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 from django.views.generic import ListView, DetailView
-from django.conf import settings
+from django.contrib.auth import get_user_model
+import json
+from django.contrib.auth.decorators import login_required
 
 # Internal Import
 from . import models
 from posts.models import Post
 
-User = settings.AUTH_USER_MODEL
+User = get_user_model()
 
 
 class AllUserProfileListView(ListView):
@@ -38,7 +40,31 @@ class AuthorDetailView(DetailView):
         print(context)
         request = self.request
         username = self.kwargs['username']
+        author = User.objects.get(username=username)
         user_posts = Post.objects.all().filter(
             author__user__username=username).filter(anonymous=False).distinct()
+        user_follows = author.followers.all().filter(
+            user=self.request.user).exists()
+        context['user_follows'] = user_follows
         context['user_posts'] = user_posts
         return context
+
+
+@login_required
+def follow_toggle(request, username):
+    current_user = request.user
+    user_to_follow = User.objects.get(username=username)
+
+    is_following = False
+    if user_to_follow in current_user.profile.following.all():
+        current_user.profile.following.remove(user_to_follow)
+    else:
+        current_user.profile.following.add(user_to_follow)
+        is_following = True
+
+    resp = {
+        "following": is_following,
+    }
+
+    response = json.dumps(resp)
+    return HttpResponse(response, content_type="application/json")
