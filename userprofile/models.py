@@ -37,3 +37,11 @@ class Profile(models.Model):
 
     class Meta:
         ordering = ('-updated',)
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        SIZE = 300, 300
+        if self.image:
+            img = Image.open(self.image.path)
+            img.thumbnail(SIZE, Image.LANCZOS)
+            img.save(self.image.path)
