@@ -1,0 +1,26 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}
+Feed | HalkaPan
+{% endblock %}
+
+{% block additional_head %}
+<link rel="stylesheet" href="{% static 'posts/css/blog_box_display.css' %}">
+{% endblock %}
+
+{% block main_content %}
+<div class="container mt-4">
+    {% include 'search/snippets/search-form.html' %}
+
+    <div class="blog__list mx-auto">
+        <div class="row">
+            {% for post in object_list %}
+            <div class="col-md-4">
+                {% include 'posts/snippets/blog_box_display.html' with obj=post%}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

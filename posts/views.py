@@ -15,6 +15,7 @@ from django.contrib.auth.mixins import (
 
 # Internal Import
 from .models import Post
+from userprofile.models import Profile
 
 
 class ExplorePostListView(ListView):
@@ -75,3 +76,24 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         if self.request.user == post.author.user or self.request.user.is_staff:
             return True
         return False
+
+
+class UserFollowingFeedListView(ListView):
+    template_name = "posts/feed.html"
+
+    def get_queryset(self):
+        request = self.request
+        if request.user.is_authenticated:
+            current_user_profile = Profile.objects.get(user=request.user)
+            users = [user.profile for user in current_user_profile.following.all()]
+            return Post.objects.all().filter(author__in=users)
+        else:
+            return Post.objects.all().order_by('?')
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(UserFollowingFeedListView,
+                        self).get_context_data(*args, **kwargs)
+        request = self.request
+        featured_post = Post.objects.featured()
+        context['featured_post'] = featured_post
+        return context

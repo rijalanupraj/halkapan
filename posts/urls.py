@@ -9,6 +9,7 @@ app_name = 'posts'
 
 urlpatterns = [
     path('explore/', views.ExplorePostListView.as_view(), name='explore'),
+    path('feed/', views.UserFollowingFeedListView.as_view(), name='feed'),
     path('post/new/', views.PostCreateView.as_view(), name='post-create'),
     path('post/<str:slug>/', views.PostDetailView.as_view(), name='post-detail'),
     path('post/<str:slug>/update/',
