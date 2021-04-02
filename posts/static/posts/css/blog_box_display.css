@@ -54,21 +54,25 @@
 .card-post-list span.post-read {
     color: rgba(0, 0, 0, 0.44);
 }
-.card-post-list span.post-read-save {
+.card-post-list span.post-like-love {
     align-items: center;
     display: inline-block;
     float: right;
     margin-top: 8px;
 }
-.card-post-list span.post-read-save a {
+.card-post-list span.post-like-love a {
     color: rgba(0, 0, 0, 0.44);
 }
 .card-post-list span.post-name a,
-.card-post-list span.post-read-save a:hover {
+.card-post-list span.post-like-love a:hover {
     color: rgba(0, 0, 0, 0.8);
 }
 .card-post-list .dot:after {
     content: "·";
     margin-left: 3px;
     margin-right: 3px;
+}
+
+.fa-heart {
+    color: red;
 }
