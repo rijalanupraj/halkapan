@@ -155,3 +155,11 @@ LOGOUT_REDIRECT_URL = LOGIN_URL
 # Media Files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+# CKEDITOR Configs
+CKEDITOR_CONFIGS = {
+    'default': {
+        'width': 'auto',
+
+    },
+}

@@ -19,10 +19,11 @@ def get_filename_ext(filepath):
 
 
 def upload_image_path(instance, filename):
+    foldername = random.randint(1, 3910209312)
     new_filename = random.randint(1, 3910209312)
     name, ext = get_filename_ext(filename)
     final_filename = f'{new_filename}{ext}'
-    return f"posts/{new_filename}/{final_filename}"
+    return f"posts/{foldername}/{final_filename}"
 
 
 class PostQuerySet(models.query.QuerySet):
@@ -77,6 +78,9 @@ class Post(models.Model):
 
     objects = PostManager()
 
+    class Meta:
+        ordering = ['-timestamp']
+
     def __str__(self):
         return self.title
 
@@ -88,7 +92,7 @@ class Post(models.Model):
 
 
 def post_pre_save_receiver(sender, instance, *args, **kwargs):
-        instance.slug = unique_slug_generator(instance)
+    instance.slug = unique_slug_generator(instance)
 
 
 # Connecting pre_save_receiver function and sender Post
