@@ -1,5 +1,5 @@
 # External Import
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 from django.views.generic import (
     ListView,
     DetailView,
@@ -11,7 +11,8 @@ from django.contrib.auth.mixins import (
     LoginRequiredMixin,
     UserPassesTestMixin
 )
-
+from django.contrib.auth.decorators import login_required
+import json
 
 # Internal Import
 from .models import Post
@@ -86,9 +87,10 @@ class UserFollowingFeedListView(ListView):
         if request.user.is_authenticated:
             current_user_profile = Profile.objects.get(user=request.user)
             users = [user.profile for user in current_user_profile.following.all()]
-            return Post.objects.all().filter(author__in=users)
+            users.append(current_user_profile)
+            return Post.objects.all().filter(author__in=users).distinct()
         else:
-            return Post.objects.all().order_by('?')
+            return Post.objects.all().order_by('?')[:20]
 
     def get_context_data(self, *args, **kwargs):
         context = super(UserFollowingFeedListView,
@@ -97,3 +99,23 @@ class UserFollowingFeedListView(ListView):
         featured_post = Post.objects.featured()
         context['featured_post'] = featured_post
         return context
+
+
+@login_required
+def post_like_toggle(request, slug):
+    current_user_profile = request.user.profile
+    post = Post.objects.get(slug=slug)
+
+    is_liked = False
+    if current_user_profile in post.likes.all():
+        post.likes.remove(current_user_profile)
+    else:
+        post.likes.add(current_user_profile)
+        is_liked = True
+
+    resp = {
+        "isLiked": is_liked,
+    }
+
+    response = json.dumps(resp)
+    return HttpResponse(response, content_type="application/json")

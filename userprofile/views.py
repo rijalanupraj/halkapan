@@ -43,8 +43,10 @@ class AuthorDetailView(DetailView):
         author = User.objects.get(username=username)
         user_posts = Post.objects.all().filter(
             author__user__username=username).filter(anonymous=False).distinct()
-        user_follows = author.followers.all().filter(
-            user=self.request.user).exists()
+        user_follows = False
+        if self.request.user.is_authenticated:
+            user_follows = author.followers.all().filter(
+                user=self.request.user).exists()
         context['user_follows'] = user_follows
         context['user_posts'] = user_posts
         return context

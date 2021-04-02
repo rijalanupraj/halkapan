@@ -32,7 +32,15 @@
                         class="post-read">10
                         min read</span>
                 </span>
-                <span class="post-like-love"><a href="" title="Read Story"><i class="far fa-heart fa-2x"></i></a></span>
+                <span class="post-like-love">
+                    {% if user.is_authenticated %}
+                    <a role="button" class="post-like-toggle" href="{% url 'posts:post-like-toggle' obj.slug %}"
+                        title="Like"><i class="far fa-heart fa-2x"></i></a>
+                    {% else %}
+                    <a role="button" href="{% url 'accounts:login' %}?next={% url 'posts:post-detial' obj.slug %}"
+                        title="Like"><i class="far fa-heart fa-2x"></i></a>
+                    {% endif %}
+                </span>
             </div>
         </div>
     </div>
