@@ -2,6 +2,8 @@
 {% url 'accounts:logout' as logout_url %}
 {% url 'accounts:register' as register_url %}
 {% url 'search:query' as search_query_url %}
+{% url 'posts:feed' as feed_url %}
+{% url 'userprofile:user-profile-update' as user_profile_update_url %}
 <aside class="sidebar">
   <div class="toggle">
     <a href="#" class="burger js-menu-toggle" data-toggle="collapse" data-target="#main-navbar">
@@ -38,7 +40,8 @@
     <div class="nav-menu">
       <ul>
         <li><a href="#"><span class="fas fa-home mr-3"></span>Home</a></li>
-        <li><a href="#"><span class="fas fa-seedling mr-3"></span>Feed</a></li>
+        <li class="{% if request.path == feed_url %}active{% endif %}"><a href="{{feed_url}}"><span
+              class="fas fa-seedling mr-3"></span>Feed</a></li>
         <li class="{% if request.path == search_query_url %}active{% endif %}"><a href="{{search_query_url}}"><span
               class="fas fa-search mr-3"></span>Search</a></li>
         {% if not user.is_authenticated %}
@@ -47,6 +50,8 @@
         <li class="{% if request.path == register_url %}active{% endif %}"><a href="{{register_url}}"><span
               class="fas fa-user mr-3"></span>Register</a></li>
         {% else %}
+        <li class="{% if request.path == user_profile_update_url %}active{% endif %}"><a
+            href="{{user_profile_update_url}}"><span class="fas fa-user mr-3"></span>Update Profile</a></li>
         <li><a href="{{logout_url}}"><span class="fas fa-sign-out-alt mr-3"></span>Logout</a></li>
 
         {% endif %}
