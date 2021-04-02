@@ -11,6 +11,7 @@ urlpatterns = [
     path('', include('posts.urls')),
     path('', include('userprofile.urls')),
     path('search/', include('search.urls')),
+    path('tag/', include('tags.urls')),
 ]
 
 if settings.DEBUG:
