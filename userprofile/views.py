@@ -20,9 +20,9 @@ class AllUserProfileListView(ListView):
 
     def get_queryset(self):
         if self.request.user.is_authenticated:
-            return models.Profile.objects.all().exclude(user=self.request.user)
+            return models.Profile.objects.all().exclude(user=self.request.user).exclude(user__is_staff=True)
         else:
-            return models.Profile.objects.all()
+            return models.Profile.objects.all().exclude(user__is_staff=True)
 
 
 class AuthorDetailView(DetailView):
