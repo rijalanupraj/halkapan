@@ -4,6 +4,7 @@
 {% url 'search:query' as search_query_url %}
 {% url 'posts:feed' as feed_url %}
 {% url 'userprofile:user-profile-update' as user_profile_update_url %}
+{% url 'posts:post-create' as post_create_url %}
 <aside class="sidebar">
   <div class="toggle">
     <a href="#" class="burger js-menu-toggle" data-toggle="collapse" data-target="#main-navbar">
@@ -42,6 +43,8 @@
         <li><a href="#"><span class="fas fa-home mr-3"></span>Home</a></li>
         <li class="{% if request.path == feed_url %}active{% endif %}"><a href="{{feed_url}}"><span
               class="fas fa-seedling mr-3"></span>Feed</a></li>
+        <li class="{% if request.path == post_create_url %}active{% endif %}"><a href="{{post_create_url}}"><span
+              class="fas fa-seedling mr-3"></span>Express Yourself</a></li>
         <li class="{% if request.path == search_query_url %}active{% endif %}"><a href="{{search_query_url}}"><span
               class="fas fa-search mr-3"></span>Search</a></li>
         {% if not user.is_authenticated %}
