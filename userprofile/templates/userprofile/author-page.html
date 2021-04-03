@@ -37,9 +37,10 @@ Users | HalkaPan
 
                         </div>
                         <hr>
+                        {% if not user == object.user %}
                         {% if user.is_authenticated %}
                         <a role="button" type="button" id="follow-toggle"
-                            href="{% url 'userprofile:follow-toggle' object.user.username %}" class="btn btn-primary">
+                            href="{% url 'userprofile:follow-toggle' object.user.username %}" class="btn btn-primary container-fluid">
                             {% if user_follows %}
                             Unfollow
                             {% else %}
@@ -50,6 +51,7 @@ Users | HalkaPan
                         <a role="button" type="button"
                             href="{% url 'accounts:login' %}?next={% url 'userprofile:author-profile-page' object.user.username %}"
                             class="btn btn-primary">Follow</a>
+                        {% endif %}
                         {% endif %}
                     </div>
                     <div class="col-md-2 col-xs-12">
