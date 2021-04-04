@@ -18,11 +18,24 @@ class AllUserProfileListView(ListView):
     model = models.Profile
     template_name = 'userprofile/all_user_profile.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        query = self.request.GET.get('username')
+        if query is not None:
+            context["query"] = query
+        return context
+
     def get_queryset(self):
-        if self.request.user.is_authenticated:
-            return models.Profile.objects.all().exclude(user=self.request.user).exclude(user__is_staff=True)
-        else:
-            return models.Profile.objects.all().exclude(user__is_staff=True)
+        request = self.request
+        method_dict = request.GET
+        query = method_dict.get('username', None)
+        profilesQuerySet = models.Profile.objects.all().exclude(user__is_staff=True)
+        if request.user.is_authenticated:
+            profilesQuerySet = profilesQuerySet.exclude(user=request.user)
+        if query and query != '':
+            profilesQuerySet = profilesQuerySet.filter(
+                user__username__icontains=query)
+        return profilesQuerySet
 
 
 class AuthorDetailView(DetailView):
