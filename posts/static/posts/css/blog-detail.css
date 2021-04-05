@@ -85,7 +85,7 @@
 .blog-detail-page ul.tags {
     list-style: none;
     padding-left: 0;
-    margin: 0 0 3rem 0;
+    margin: 0 0 1rem 0;
 }
 .blog-detail-page ul.tags li {
     display: inline-block;
@@ -115,4 +115,14 @@
 .blog-detail-page .post-top-meta .btn.follow {
     margin-left: 5px;
     margin-top: -4px;
+}
+
+.we-care {
+    font-size: 30px;
+    vertical-align: middle;
+    margin: 0px 1rem;
+}
+
+.fa-heart {
+    color: red;
 }
