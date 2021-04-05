@@ -14,7 +14,8 @@ Users | HalkaPan
             <div class="card my-2 p-1">
                 <img src="{{profile.image.url}}" class="rounded-circle align-self-center" width="100" height="100"
                     alt="">
-                <h3 class="profile-username text-center">{{profile.user.username}}</h3>
+                <a class="profile-username text-center"
+                    href="{% url 'userprofile:author-profile-page' profile.user.username %}">{{profile.user.username}}</a>
 
                 <p class="text-muted text-center">Bio Here</p>
 

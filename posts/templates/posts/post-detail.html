@@ -59,7 +59,19 @@
 
                     </ul>
                 </div>
-
+                <!-- Like Button -->
+                <div class="d-flex mb-3 justify-content-center">
+                    {% if user.is_authenticated %}
+                    <a role="button" type="button" class="post-like-toggle btn btn-light px-3"
+                        href="{% url 'posts:post-like-toggle' object.slug %}" title="Like"> {% if user.profile in object.likes.all %}We are with you <i class="we-care fa fa-heart fa-2x"></i>{% else %}
+                        We are with you <i class="we-care far fa-heart fa-2x"></i> {% endif %} <span
+                            class="badge badge-info like-number">{{object.likes.count}}</span></a>
+                    {% else %}
+                    <a role="button" type="button" class="btn btn-light px-3"href="{% url 'accounts:login' %}?next={% url 'posts:post-detail' object.slug %}"
+                        title="Like">We are with you <i class="we-care far fa-heart fa-2x"></i><span
+                            class="badge badge-info">{{object.likes.count}}</span></a>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>
@@ -67,4 +79,5 @@
 
     {% block additional_body %}
     <script src="{% static 'posts/js/confirm-delete.js' %}"></script>
+    <script src="{% static 'posts/js/blog-detail-page-post-like-toggle.js' %}"></script>
     {% endblock %}
