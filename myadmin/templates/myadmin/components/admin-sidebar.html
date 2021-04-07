@@ -1,0 +1,47 @@
+{% url 'accounts:login' as login_url %}
+{% url 'accounts:logout' as logout_url %}
+{% url 'accounts:register' as register_url %}
+{% url 'search:query' as search_query_url %}
+<aside class="sidebar">
+    <div class="toggle">
+        <a href="#" class="burger js-menu-toggle" data-toggle="collapse" data-target="#main-navbar">
+            <span></span>
+        </a>
+    </div>
+    <div class="side-inner">
+        <div class="profile">
+            {% if user.profile.image %}
+            <img src="{{user.profile.image.url}}" alt="image description" class="img-fluid">
+            {% endif %}
+            <h3 class="name">{{user.username}}</h3>
+            <span class="bio">Bio Here</span>
+        </div>
+
+        <div class="nav-menu">
+            <ul>
+
+                </li>
+                <li><a href="#"><span class="fas fa-home mr-3"></span>Home</a></li>
+                <li><a href="#"><span class="fas fa-seedling mr-3"></span>Feed</a></li>
+                <li><a href="#"><span class="fas fa-user mr-3"></span>Users</a></li>
+                <li class="accordion">
+                    <a href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false"
+                        aria-controls="collapseOne" class="collapsible">
+                        <span class="fa fa-bomb mr-3"></span>Others
+                    </a>
+
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne">
+                        <div>
+                            <ul>
+                                <li><a href="#">Other 1</a></li>
+                                <li><a href="#">Others 2</a></li>
+                                <li><a href="#">Other 3</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</aside>

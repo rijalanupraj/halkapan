@@ -12,6 +12,7 @@ urlpatterns = [
     path('', include('userprofile.urls')),
     path('search/', include('search.urls')),
     path('tag/', include('tags.urls')),
+    path('myadmin/', include('myadmin.urls')),
 ]
 
 if settings.DEBUG:
