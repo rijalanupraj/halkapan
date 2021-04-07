@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'userprofile',
     'search',
     'tags',
+    'myadmin',
 
     # Other packages
     'bootstrapform',
