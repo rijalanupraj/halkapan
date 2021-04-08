@@ -10,6 +10,7 @@ urlpatterns = [
     path('', include('accounts.urls')),
     path('', include('posts.urls')),
     path('', include('userprofile.urls')),
+    path('', include('home.urls')),
     path('search/', include('search.urls')),
     path('tag/', include('tags.urls')),
     path('myadmin/', include('myadmin.urls')),
