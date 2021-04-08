@@ -1,0 +1,121 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}
+HalkaPan
+{% endblock %}
+
+{% block additional_head %}
+<link rel="stylesheet" href="{% static 'home/css/home-main.css' %}">
+{% endblock %}
+
+{% block main_content %}
+<div class="home">
+    <section id="hero">
+        <div class="hero-container">
+            <h1>Welcome to HalkaPan</h1>
+            <h2>Express Yourself - Write a bit long</h2>
+            <a href="#" class="btn-get-started">Get Started</a>
+        </div>
+    </section><!-- End Hero Section -->
+
+    <!-- ======= Facts Section ======= -->
+    <section id="facts">
+        <div class="container">
+            <div class="section-header">
+                <h3 class="section-title">Facts</h3>
+                <p class="section-description">Join the enthusiastic group of people now</p>
+            </div>
+            <div class="row counters">
+
+                <div class="col-lg-3 col-6 text-center">
+                    <span data-toggle="counter-up">232</span>
+                    <p>Users</p>
+                </div>
+
+                <div class="col-lg-3 col-6 text-center">
+                    <span data-toggle="counter-up">521</span>
+                    <p>Posts</p>
+                </div>
+
+                <div class="col-lg-3 col-6 text-center">
+                    <span data-toggle="counter-up">15</span>
+                    <p>Authors</p>
+                </div>
+
+                <div class="col-lg-3 col-6 text-center">
+                    <span data-toggle="counter-up">222</span>
+                    <p>Likes</p>
+                </div>
+
+            </div>
+
+        </div>
+    </section><!-- End Facts Section -->
+
+    <!-- ======= BLog Section ======= -->
+    <section>
+
+    </section><!-- End Blog Section -->
+
+    <!-- ======= Call To Action Section ======= -->
+    <section id="call-to-action">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 text-center text-lg-left">
+                    <h3 class="cta-title">Express Yourself</h3>
+                    <p class="cta-text">Write Something about express</p>
+                </div>
+                <div class="col-lg-3 cta-btn-container text-center">
+                    <a class="cta-btn align-middle" href="#">Express</a>
+                </div>
+            </div>
+
+        </div>
+    </section><!-- End Call To Action Section -->
+
+
+    <!-- ======= Authors Section ======= -->
+    <section id="authors">
+        <div class="container">
+            <div class="section-header">
+                <h3 class="section-title">Popular Authors</h3>
+                <p class="section-description">Write Something about Authors</p>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="member">
+                        <div class="pic"><img src="" alt=""></div>
+                        <h4>Anup Raj Rijal</h4>
+                        <span>30 Posts</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section><!-- End authors Section -->
+
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="footer-top">
+            <div class="container">
+
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="copyright">
+                &copy; Copyright <strong>HalkaPan</strong>. All Rights Reserved
+            </div>
+            <div class="credits">
+                Designed by <a href="https://github.com/rijalanupraj">Anup Raj Rijal</a>
+            </div>
+        </div>
+    </footer>
+
+</div>
+
+{% endblock %}
+{% block additional_body %}
+<script src="{% static 'home/js/home-main.js' %}"></script>
+{% endblock %}
