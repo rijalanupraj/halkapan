@@ -5,7 +5,9 @@ HalkaPan
 {% endblock %}
 
 {% block additional_head %}
+<link rel="stylesheet" href="{% static 'posts/css/blog_box_display.css' %}">
 <link rel="stylesheet" href="{% static 'home/css/home-main.css' %}">
+
 {% endblock %}
 
 {% block main_content %}
@@ -33,7 +35,7 @@ HalkaPan
                 </div>
 
                 <div class="col-lg-3 col-6 text-center">
-                    <span data-toggle="counter-up">521</span>
+                    <span data-toggle="counter-up">{{post_count}}</span>
                     <p>Posts</p>
                 </div>
 
@@ -43,7 +45,7 @@ HalkaPan
                 </div>
 
                 <div class="col-lg-3 col-6 text-center">
-                    <span data-toggle="counter-up">222</span>
+                    <span data-toggle="counter-up">{{likes_count}}</span>
                     <p>Likes</p>
                 </div>
 
@@ -54,7 +56,19 @@ HalkaPan
 
     <!-- ======= BLog Section ======= -->
     <section>
-
+        <div class="container p-5">
+            <div class="section-header">
+                <h3 class="section-title">Popular Posts</h3>
+                <p class="section-description">Write & Get Featured</p>
+            </div>
+            <div class="row">
+                {% for post in top_post %}
+                <div class="col-md-4">
+                    {% include 'posts/snippets/blog_box_display.html' with obj=post%}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
     </section><!-- End Blog Section -->
 
     <!-- ======= Call To Action Section ======= -->
@@ -118,4 +132,6 @@ HalkaPan
 {% endblock %}
 {% block additional_body %}
 <script src="{% static 'home/js/home-main.js' %}"></script>
+<script src="{% static 'posts/js/post-like-toggle.js' %}"></script>
+
 {% endblock %}

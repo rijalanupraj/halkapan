@@ -1,13 +1,11 @@
 # External Import
 from django.urls import path
-from django.shortcuts import render
+
+# Internal Import
+from . import views
+
 app_name = 'home'
 
-
-def index(request):
-    return render(request, "home/home.html")
-
-
 urlpatterns = [
-    path('', index)
+    path('', views.home, name='home-page')
 ]
