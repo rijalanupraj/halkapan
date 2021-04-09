@@ -3,6 +3,7 @@
 {% url 'accounts:register' as register_url %}
 {% url 'search:query' as search_query_url %}
 {% url 'posts:feed' as feed_url %}
+{% url 'home:home-page' as home_url %}
 {% url 'userprofile:user-profile-update' as user_profile_update_url %}
 {% url 'posts:post-create' as post_create_url %}
 <aside class="sidebar">
@@ -40,7 +41,8 @@
 
     <div class="nav-menu">
       <ul>
-        <li><a href="#"><span class="fas fa-home mr-3"></span>Home</a></li>
+        <li><a class="{% if request.path == home_url %}active{% endif %}" href="{{home_url}}"><span
+              class="fas fa-home mr-3"></span>Home</a></li>
         <li class="{% if request.path == feed_url %}active{% endif %}"><a href="{{feed_url}}"><span
               class="fas fa-seedling mr-3"></span>Feed</a></li>
         <li class="{% if request.path == post_create_url %}active{% endif %}"><a href="{{post_create_url}}"><span
