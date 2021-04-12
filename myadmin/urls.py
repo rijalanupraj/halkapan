@@ -8,7 +8,7 @@ app_name = 'myadmin'
 
 urlpatterns = [
     path('', views.dashboard, name='admin-dashboard'),
-    path('users/', views.UserListView.as_view(), name='admin-users'),
+    path('users/', views.UserListView.as_view(), name='users-list'),
     path('delete-user/<str:username>', views.delete_user, name='delete-user'),
     path('make-staff/<str:username>', views.make_staff, name="make-staff"),
     path('make-normal-user/<str:username>',

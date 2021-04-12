@@ -1,4 +1,3 @@
-from django.http import HttpResponse
 from django.shortcuts import redirect
 
 
@@ -6,7 +5,7 @@ def unauthenticated_user(view_function):
     def wrapper_function(request, *args, **kwargs):
         if request.user.is_authenticated:
             if request.user.is_staff:
-                return redirect('/admins')
+                return redirect('/myadmin')
             elif not request.user.is_staff:
                 return redirect('/')
         else:
@@ -19,6 +18,7 @@ def admin_only(view_function):
         if request.user.is_staff:
             return view_function(request, *args, **kwargs)
         else:
+            print("Hello")
             return redirect('/')
     return wrapper_function
 
