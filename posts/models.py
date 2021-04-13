@@ -27,6 +27,10 @@ def upload_image_path(instance, filename):
 
 
 class PostQuerySet(models.query.QuerySet):
+
+    def admin(self):
+        return self.all()
+
     def featured(self):
         return self.filter(featured=True, active=True, draft=False).distinct()
 
@@ -58,6 +62,9 @@ class PostManager(models.Manager):
     def search(self, query):
         return self.get_queryset().active().search(query)
 
+    def foradmin(self):
+        return self.get_queryset().admin()
+
 
 class Post(models.Model):
     author = models.ForeignKey(Profile,
@@ -74,7 +81,7 @@ class Post(models.Model):
     image = models.ImageField(upload_to=upload_image_path,
                               null=True, blank=True)
     likes = models.ManyToManyField(
-        Profile, related_name='likes')
+        Profile, related_name='likes', null=True, blank=True)
 
     objects = PostManager()
 
