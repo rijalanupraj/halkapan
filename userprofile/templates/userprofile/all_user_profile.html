@@ -45,7 +45,7 @@ Users | HalkaPan
 
                 {% else %}
                 <a role="button" type="button"
-                    href="{% url 'accounts:login' %}?next={% url 'userprofile:author-profile-page' profile.user.username %}"
+                    href="{% url 'login' %}?next={% url 'userprofile:author-profile-page' profile.user.username %}"
                     class="btn btn-primary">Follow</a>
                 {% endif %}
             </div>

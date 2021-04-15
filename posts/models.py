@@ -81,7 +81,7 @@ class Post(models.Model):
     image = models.ImageField(upload_to=upload_image_path,
                               null=True, blank=True)
     likes = models.ManyToManyField(
-        Profile, related_name='likes', null=True, blank=True)
+        Profile, related_name='likes', blank=True)
 
     objects = PostManager()
 

@@ -112,7 +112,7 @@ def update_post(request, id):
 # class AdminPostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 #     model = Post
 #     fields = ['author', 'title', 'content',
-#               'draft', 'anonymous', 'image', 'active']
+#               'draft', 'anonymous', 'image', 'is_active']
 #     template_name = "myadmin/post-update-form.html"
 
 #     def test_func(self):
@@ -125,7 +125,7 @@ def update_post(request, id):
 @admin_only
 def approve_post(self, id):
     post = Post.objects.get(id=id)
-    post.active = True
+    post.is_active = True
     post.save()
     return redirect('/myadmin/posts')
 
@@ -133,6 +133,6 @@ def approve_post(self, id):
 @admin_only
 def disapprove_post(self, id):
     post = Post.objects.get(id=id)
-    post.active = False
+    post.is_active = False
     post.save()
     return redirect('/myadmin/posts')
