@@ -19,3 +19,14 @@ body {
 span.help-block {
     color: red;
 }
+
+/* For Django Alert */
+.myAlert-bottom {
+    z-index: 50;
+    position: fixed;
+    bottom: 5px;
+}
+
+.myAlert-bottom.alert {
+    display: none;
+}
