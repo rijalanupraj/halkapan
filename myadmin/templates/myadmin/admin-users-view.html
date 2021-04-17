@@ -35,26 +35,27 @@ Dashboard | HalkaPan
                             <td>{% if user_object.is_active %}Active{% else %}InActive{% endif %}</td>
                             <td><img src="{{user_object.profile.image.url}}" width="50" height="50" alt=""></td>
                             <td>
-                                <a href="">
+                                <a href="" data-toggle="tooltip" title="Update">
                                     <span class="material-icons text-primary">
                                         edit
                                     </span>
                                 </a>
                                 {% if not request.user == user_object %}
-                                <a href="{% url 'myadmin:delete-user' user_object.username %}"
-                                    onclick="return confirm('Are you sure want to update this user?')">
+                                <a href="{% url 'myadmin:delete-user' user_object.username %}" data-toggle="tooltip"
+                                    title="Delete User"
+                                    onclick="return confirm('Are you sure want to delete this user?')">
                                     <span class="material-icons text-danger">
                                         delete_forever
                                     </span>
                                 </a>
                                 {% endif %}
                                 {% if not user_object.is_staff %}<a
-                                    href="{% url 'myadmin:make-staff' user_object.username %}"><span
-                                        class="material-icons">
+                                    href="{% url 'myadmin:make-staff' user_object.username %}" data-toggle="tooltip"
+                                    title="Make Admin"><span class="material-icons">
                                         person_add
                                     </span></a>
-                                {% else %} <a href="{% url 'myadmin:make-normal-user' user_object.username %}"><span
-                                        class="material-icons">
+                                {% else %} <a href="{% url 'myadmin:make-normal-user' user_object.username %}"
+                                    data-toggle="tooltip" title="Remove Admin"><span class="material-icons">
                                         remove_circle_outline
                                     </span></a>{% endif %}
                             </td>
