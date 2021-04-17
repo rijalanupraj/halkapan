@@ -15,12 +15,13 @@
     </title>
 
     <!-- Including css -->
-    {% include 'base/base_css.html' %}
+    {% include 'myadmin/adminbase/admin-css-base.html' %}
 
     <!-- Content for Page Specific head -->
     {% block additional_head %}
 
     {% endblock %}
+    </div>
 
 </head>
 
@@ -28,16 +29,14 @@
 
     <!-- Sidebar Component -->
     {% include 'myadmin/components/admin-sidebar.html' %}
-    <!-- Top Head Bar - which will be stretch from left to right and will be fixed -->
-    <div class="container-fluid d-block top-head-bar"></div>
-    <main class="pt-5">
-        <!-- Main Content -->
-        {% block main_content %}
 
-        {% endblock %}
-    </main>
+    <!-- Main Content -->
+    {% block main_content %}
+
+    {% endblock %}
+
     <!-- Including javascript -->
-    {% include 'base/base_js.html' %}
+    {% include 'myadmin/adminbase/admin-js-base.html' %}
 
     <!-- Content for Page Specific Extra content like:javascript -->
     {% block additional_body %}
