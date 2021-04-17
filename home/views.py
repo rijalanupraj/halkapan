@@ -20,6 +20,10 @@ def home(request):
     user = set()
     for post in Post.objects.all().order_by("likes"):
         user.add(post.author)
+    author = set()
+    for post in Post.objects.all():
+        author.add(post.author)
+    author_count = len(author)
     user = list(user)
     user = user[:4]
 
@@ -30,5 +34,6 @@ def home(request):
         'user_count': user_count,
         'featured_post': featured_post,
         'user_profiles': user,
+        'author_count': author_count,
     }
     return render(request, "home/home.html", context)

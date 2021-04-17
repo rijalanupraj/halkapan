@@ -227,9 +227,9 @@
 }
 
 .home #authors .member .pic {
-    margin-bottom: 15px;
+    margin-bottom: 1px;
     overflow: hidden;
-    height: 260px;
+    height: 150px;
 }
 
 .home #authors .member .pic img {

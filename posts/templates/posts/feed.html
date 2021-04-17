@@ -6,6 +6,7 @@ Feed | HalkaPan
 
 {% block additional_head %}
 <link rel="stylesheet" href="{% static 'posts/css/blog_box_display.css' %}">
+<link rel="stylesheet" href="{% static 'posts/css/feed.css' %}">
 {% endblock %}
 
 {% block main_content %}
@@ -15,7 +16,7 @@ Feed | HalkaPan
     <div class="blog__list mx-auto">
         <div class="row">
             {% for post in object_list %}
-            <div class="col-md-4">
+            <div class="col-md-8 mx-auto">
                 {% include 'posts/snippets/blog_box_display.html' with obj=post%}
             </div>
             {% endfor %}
