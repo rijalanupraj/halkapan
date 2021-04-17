@@ -26,6 +26,8 @@ def home(request):
     author_count = len(author)
     user = list(user)
     user = user[:4]
+    top_post = set(top_post)
+    top_post = list(top_post)
 
     context = {
         'post_count': post_count,
