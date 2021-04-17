@@ -1,40 +1,39 @@
-{% url 'accounts:login' as login_url %}
-{% url 'accounts:logout' as logout_url %}
-{% url 'accounts:register' as register_url %}
-{% url 'search:query' as search_query_url %}
-<aside class="sidebar">
-    <div class="toggle">
-        <a href="#" class="burger js-menu-toggle" data-toggle="collapse" data-target="#main-navbar">
-            <span></span>
-        </a>
-    </div>
-    <div class="side-inner">
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-mattBlackLight fixed-top">
+    <button class="navbar-toggler sideMenuToggler" type="button">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-        <div class="nav-menu">
-            <ul>
-
-                </li>
-                <li><a href="#"><span class="fas fa-home mr-3"></span>Home</a></li>
-                <li><a href="#"><span class="fas fa-seedling mr-3"></span>Feed</a></li>
-                <li><a href="#"><span class="fas fa-user mr-3"></span>Users</a></li>
-                <li class="accordion">
-                    <a href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false"
-                        aria-controls="collapseOne" class="collapsible">
-                        <span class="fa fa-bomb mr-3"></span>Others
+    <a class="navbar-brand mx-auto" href="#">HalkaPan</a>
+</nav>
+<div class="wrapper d-flex">
+    <div class="sideMenu bg-mattBlackLight">
+        <div class="sidebar">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a href="" class="nav-link px-2">
+                        <i class="material-icons icon">
+                            dashboard
+                        </i>
+                        <span class="text">Dashboard</span>
                     </a>
-
-                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne">
-                        <div>
-                            <ul>
-                                <li><a href="#">Other 1</a></li>
-                                <li><a href="#">Others 2</a></li>
-                                <li><a href="#">Other 3</a></li>
-                            </ul>
-                        </div>
-                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="" class="nav-link px-2">
+                        <i class="material-icons icon">
+                            person
+                        </i>
+                        <span class="text">Users</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link px-2 sideMenuToggler">
+                        <i class="material-icons icon expandView ">
+                            view_list
+                        </i>
+                        <span class="text">Resize</span>
+                    </a>
                 </li>
             </ul>
         </div>
     </div>
-
-</aside>
