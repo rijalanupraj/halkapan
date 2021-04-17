@@ -19,45 +19,45 @@ Dashboard | HalkaPan
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Username</th>
-                            <th>Email</th>
+                            <th>Title</th>
+                            <th>Author</th>
                             <th>Status</th>
-                            <th>Profile Pic</th>
+                            <th>Image</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for user_object in object_list %}
+                        {% for object in object_list %}
                         <tr>
-                            <td>{{user_object.id}}</td>
-                            <td>{{user_object.username}}</td>
-                            <td>{{user_object.email}}</td>
-                            <td>{% if user_object.is_active %}Active{% else %}InActive{% endif %}</td>
-                            <td><img src="{{user_object.profile.image.url}}" width="50" height="50" alt=""></td>
+                            <td>{{object.id}}</td>
+                            <td>{{object.title}}</td>
+                            <td>{{object.author.user.username}}</td>
+                            <td>{% if object.active %}Active{% else %}InActive{% endif %}</td>
+
+                            <td>{% if object.image %}<img src="{{object.image.url}}" width="50" height="50" alt="">{% endif %}</td>
                             <td>
-                                <a href="{% url 'myadmin:update-user' user_object.username %}" data-toggle="tooltip" title="Update">
+                                <a href="{% url 'myadmin:post-update' object.pk %}" data-toggle="tooltip" title="Update">
                                     <span class="material-icons text-primary">
                                         edit
                                     </span>
                                 </a>
-                                {% if not request.user == user_object %}
-                                <a href="{% url 'myadmin:delete-user' user_object.username %}" data-toggle="tooltip"
-                                    title="Delete User"
+
+                                <a href="{% url 'myadmin:post-delete' object.id %}" data-toggle="tooltip"
+                                    title="Delete Post"
                                     onclick="return confirm('Are you sure want to delete this user?')">
                                     <span class="material-icons text-danger">
                                         delete_forever
                                     </span>
                                 </a>
-                                {% endif %}
-                                {% if not user_object.is_staff %}<a
-                                    href="{% url 'myadmin:make-staff' user_object.username %}" data-toggle="tooltip"
-                                    title="Make Admin"><span class="material-icons">
-                                        person_add
+                                {% if not object.active %}<a
+                                    href="{% url 'myadmin:approve-post' object.id %}"
+                                    data-toggle="tooltip" title="Approve Post"><span class="material-icons">
+                                        check_circle
                                     </span></a>
-                                {% else %} <a href="{% url 'myadmin:make-normal-user' user_object.username %}"
-                                    data-toggle="tooltip" title="Remove Admin"><span class="material-icons">
-                                        remove_circle_outline
-                                    </span></a>{% endif %}
+                                {% else %} <a href="{% url 'myadmin:disapprove-post' object.id %}"
+                                    data-toggle="tooltip" title="Hide Post"><span class="material-icons">
+                                        visibility_off
+                                        </span></a>{% endif %}
                             </td>
                         </tr>
                         {% endfor %}

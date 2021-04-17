@@ -1,6 +1,7 @@
 {% load static %}
 {% url 'myadmin:users-list' as users_list_url %}
 {% url 'myadmin:admin-dashboard' as admin_dashboard_url %}
+{% url 'myadmin:posts-list' as posts_list_url %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-mattBlackLight fixed-top">
     <button class="navbar-toggler sideMenuToggler" type="button">
         <span class="navbar-toggler-icon"></span>
@@ -26,6 +27,14 @@
                             person
                         </i>
                         <span class="text">Users</span>
+                    </a>
+                </li>
+                <li class="nav-item {% if request.path == posts_list_url %}bg-mattBlackDark{% endif %}">
+                    <a href="{{posts_list_url}}" class="nav-link px-2">
+                        <span class="material-icons icon">
+                            rss_feed
+                        </span>
+                        <span class="text">Posts</span>
                     </a>
                 </li>
                 <li class="nav-item">
