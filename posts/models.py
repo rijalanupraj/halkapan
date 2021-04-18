@@ -8,7 +8,7 @@ from django.db.models import Q
 from ckeditor.fields import RichTextField
 
 # Create your models here.
-from .utils import unique_slug_generator
+from .utils import unique_slug_generator, get_read_time
 from userprofile.models import Profile
 
 
@@ -78,6 +78,8 @@ class Post(models.Model):
     draft = models.BooleanField(default=False)
     featured = models.BooleanField(default=False)
     anonymous = models.BooleanField(default=False)
+    read_time = models.IntegerField(default=0)
+
     image = models.ImageField(upload_to=upload_image_path,
                               null=True, blank=True)
     likes = models.ManyToManyField(
@@ -100,6 +102,10 @@ class Post(models.Model):
 
 def post_pre_save_receiver(sender, instance, *args, **kwargs):
     instance.slug = unique_slug_generator(instance)
+    if instance.content:
+        html_string = instance.content
+        read_time_var = get_read_time(html_string)
+        instance.read_time = read_time_var
 
 
 # Connecting pre_save_receiver function and sender Post
