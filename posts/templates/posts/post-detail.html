@@ -67,7 +67,7 @@
                         We are with you <i class="we-care far fa-heart fa-2x"></i> {% endif %} <span
                             class="badge badge-info like-number">{{object.likes.count}}</span></a>
                     {% else %}
-                    <a class="btn btn-light px-3" href="{% url 'accounts:login' %}?next={% url 'posts:post-detail' object.slug %}" role="button"
+                    <a class="btn btn-light px-3" href="{% url 'login' %}?next={% url 'posts:post-detail' object.slug %}" role="button"
                        title="Like"
                        type="button">We are with you <i class="we-care far fa-heart fa-2x"></i><span
                             class="badge badge-info">{{object.likes.count}}</span></a>

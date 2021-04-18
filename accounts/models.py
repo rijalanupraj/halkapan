@@ -59,7 +59,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         unique=True,
     )
     username = models.CharField(max_length=30, unique=True)
-    active = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
@@ -75,5 +75,5 @@ class User(AbstractBaseUser, PermissionsMixin):
         return f'{self.username} | {self.email}'
 
     @property
-    def is_active(self):
-        return self.active
+    def active(self):
+        return self.is_active
