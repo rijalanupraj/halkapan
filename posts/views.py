@@ -21,7 +21,7 @@ from userprofile.models import Profile
 
 class ExplorePostListView(ListView):
     template_name = "posts/explore.html"
-    paginate_by = 2
+    paginate_by = 1
 
     def get_queryset(self):
         request = self.request
@@ -81,6 +81,7 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 class UserFollowingFeedListView(ListView):
     template_name = "posts/feed.html"
+    paginate_by = 1
 
     def get_queryset(self):
         request = self.request

@@ -29,8 +29,7 @@
                     {% endif %}
                     <br />
                     <span class="post-date">{{obj.timestamp | date:'d M, Y'}}</span><span class="dot"></span><span
-                        class="post-read">10
-                        min read</span>
+                        class="post-read">{{obj.read_time}}min</span>
                 </span>
                 <span class="post-like-love">
                     {% if user.is_authenticated %}
