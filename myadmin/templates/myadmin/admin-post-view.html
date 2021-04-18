@@ -32,7 +32,7 @@ Dashboard | HalkaPan
                             <td>{{object.id}}</td>
                             <td>{{object.title}}</td>
                             <td>{{object.author.user.username}}</td>
-                            <td>{% if object.active %}Active{% else %}InActive{% endif %}</td>
+                            <td>{% if object.is_active %}Active{% else %}InActive{% endif %}</td>
 
                             <td>{% if object.image %}<img src="{{object.image.url}}" width="50" height="50" alt="">{% endif %}</td>
                             <td>
@@ -49,7 +49,7 @@ Dashboard | HalkaPan
                                         delete_forever
                                     </span>
                                 </a>
-                                {% if not object.active %}<a
+                                {% if not object.is_active %}<a
                                     href="{% url 'myadmin:approve-post' object.id %}"
                                     data-toggle="tooltip" title="Approve Post"><span class="material-icons">
                                         check_circle
