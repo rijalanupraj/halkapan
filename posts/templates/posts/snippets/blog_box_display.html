@@ -6,7 +6,15 @@
     {% endif %}
     <div class="card-block">
         <h2 class="card-title"><a href="{{obj.get_absolute_url}}">{{obj.title}}</a>
+            {% if update %}
+            <a href="{% url 'posts:post-update' obj.slug %}" data-toggle="tooltip" title="Update">
+                <span class="material-icons">
+                    edit
+                </span>
+            </a>
+            {% endif %}
         </h2>
+
         <h4 class="card-text">Little info goes here</h4>
         <div class="metafooter">
             <div class="wrapfooter">

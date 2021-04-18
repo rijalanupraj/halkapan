@@ -9,11 +9,15 @@ from ckeditor.fields import RichTextField
 
 from django.contrib.contenttypes.models import ContentType
 from comments.models import Comment
+import re
 
-# Create your models here.
 from .utils import unique_slug_generator, get_read_time
 from userprofile.models import Profile
 from tags.models import Tag
+
+
+def normalize_query(query_string, findterms=re.compile(r'"([^"]+)"|(\S+)').findall, normspace=re.compile(r'\s{2,}').sub):
+    return [normspace('', (t[0] or t[1]).strip()) for t in findterms(query_string)]
 
 
 def get_filename_ext(filepath):
@@ -63,8 +67,27 @@ class PostManager(models.Manager):
     def drafted(self):
         return self.get_queryset().draft()
 
-    def search(self, query):
-        return self.get_queryset().active().search(query)
+    def search(self, query_string):
+
+        query = None
+        terms = normalize_query(query_string)
+        search_fields = ['title', 'slug',
+                         'tags__title', 'author__user__username']
+        for term in terms:
+            or_query = None  # Query to search for a given term in each field
+            for field_name in search_fields:
+                q = Q(**{"%s__icontains" % field_name: term})
+                if or_query is None:
+                    or_query = q
+                else:
+                    or_query = or_query | q
+            if query is None:
+                query = or_query
+            else:
+                query = query | or_query
+        return self.filter(query).active().filter(draft=False).distinct()
+
+        # return self.get_queryset().active().search(query_string)
 
     def foradmin(self):
         return self.get_queryset().admin()

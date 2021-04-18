@@ -57,11 +57,15 @@ class AuthorDetailView(DetailView):
         user_posts = Post.objects.all().filter(
             author__user__username=username).filter(anonymous=False).distinct()
         user_follows = False
+        drafts = []
         if self.request.user.is_authenticated:
             user_follows = author.followers.all().filter(
                 user=self.request.user).exists()
+            drafts = Post.objects.foradmin().filter(
+                author__user=self.request.user).filter(draft=True).distinct()
         context['user_follows'] = user_follows
         context['user_posts'] = user_posts
+        context['drafts'] = drafts
         return context
 
 

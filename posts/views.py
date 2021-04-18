@@ -111,6 +111,10 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     fields = ['title', 'content', 'draft', 'anonymous', 'image', 'tags']
     template_name = "posts/post-update-form.html"
 
+    def get_queryset(self):
+        return Post.objects.foradmin()
+
+
     def form_valid(self, form):
         form.instance.author = self.request.user.profile
         return super().form_valid(form)

@@ -18,7 +18,7 @@ Users | HalkaPan
                 <div class="row post-top-meta authorpage">
                     <div class="col-md-10 col-xs-12">
                         <h1>{{object.user.username}}</h1>
-                        <span class="author-description">Write about the user here haha he he he eheh eeh</span><br>
+                        <span class="author-description">{{object.user.profile.bio}}</span><br>
                         <hr>
                         <div class="counter d-flex justify-content-center">
                             <div class="col">
@@ -66,6 +66,13 @@ Users | HalkaPan
 
 <div class="graybg authorpage">
     <div class="container">
+        <div class="row">
+            {% for post in drafts %}
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                {% include 'posts/snippets/blog_box_display.html' with obj=post update="true"%}
+            </div>
+            {% endfor %}
+        </div>
         <div class="row">
             {% for post in user_posts %}
             <div class="col-lg-4 col-md-6 col-sm-12">

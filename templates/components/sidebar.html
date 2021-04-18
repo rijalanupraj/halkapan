@@ -3,9 +3,11 @@
 {% url 'register' as register_url %}
 {% url 'search:query' as search_query_url %}
 {% url 'posts:feed' as feed_url %}
+{% url 'posts:explore' as explore_url %}
 {% url 'home:home-page' as home_url %}
 {% url 'userprofile:user-profile-update' as user_profile_update_url %}
 {% url 'posts:post-create' as post_create_url %}
+{% url 'userprofile:author-profile-page' user.username as user_profile_page %}
 <aside class="sidebar">
   <div class="toggle">
     <a href="#" class="burger js-menu-toggle" data-toggle="collapse" data-target="#main-navbar">
@@ -41,12 +43,14 @@
 
     <div class="nav-menu">
       <ul>
+        <li class="{% if request.path == post_create_url %}active{% endif %}"><a href="{{post_create_url}}"><span
+              class="fas fa-feather-alt mr-3"></span>Express Yourself</a></li>
         <li><a class="{% if request.path == home_url %}active{% endif %}" href="{{home_url}}"><span
               class="fas fa-home mr-3"></span>Home</a></li>
         <li class="{% if request.path == feed_url %}active{% endif %}"><a href="{{feed_url}}"><span
               class="fas fa-seedling mr-3"></span>Feed</a></li>
-        <li class="{% if request.path == post_create_url %}active{% endif %}"><a href="{{post_create_url}}"><span
-              class="fas fa-feather-alt mr-3"></span>Express Yourself</a></li>
+        <li class="{% if request.path == explore_url %}active{% endif %}"><a href="{{explore_url}}"><span
+              class="fas fa-eye mr-3"></span>Explore</a></li>
         <li class="{% if request.path == search_query_url %}active{% endif %}"><a href="{{search_query_url}}"><span
               class="fas fa-search mr-3"></span>Search</a></li>
         {% if not user.is_authenticated %}
@@ -55,8 +59,10 @@
         <li class="{% if request.path == register_url %}active{% endif %}"><a href="{{register_url}}"><span
               class="fas fa-user mr-3"></span>Register</a></li>
         {% else %}
+        <li class="{% if request.path == user_profile_page %}active{% endif %}"><a
+            href="{{user_profile_page}}"><span class="fas fa-user mr-3"></span>Profile</a></li>
         <li class="{% if request.path == user_profile_update_url %}active{% endif %}"><a
-            href="{{user_profile_update_url}}"><span class="fas fa-user mr-3"></span>Update Profile</a></li>
+            href="{{user_profile_update_url}}"><span class="fas fa-user-edit mr-3"></span>Update Profile</a></li>
         <li><a href="{{logout_url}}"><span class="fas fa-sign-out-alt mr-3"></span>Logout</a></li>
 
         {% endif %}

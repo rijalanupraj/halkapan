@@ -36,6 +36,16 @@
                             {% endif %}
                             <span class="post-date">{{object.timestamp | date:'d M, Y'}}</span><span
                                 class="dot"></span><span class="post-read">{{object.read_time}} mins read</span>
+                                {% if user == object.author.user %}
+                                <div class="row my-2 mx-auto">
+                                <a href="{% url 'posts:post-update' object.slug %}" class="btn btn-secondary mx-1" data-toggle="tooltip" title="Update">
+                                    Update
+                                </a>
+                                <form method="POST" action="{% url 'posts:post-delete' object.slug %}">
+                                    {% csrf_token %}<input onclick="return confirm('Are you sure want to delete this Post?')" type="submit" class="btn btn-danger" value="Delete">
+                                 </form>
+                                </div>
+                                {% endif %}
                         </div>
                     </div>
 
