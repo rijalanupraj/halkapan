@@ -53,6 +53,8 @@ INSTALLED_APPS = [
     'bootstrapform',
     'ckeditor',
     'six',
+    'crispy_forms',
+
 
 ]
 
