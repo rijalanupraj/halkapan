@@ -7,6 +7,8 @@
 {% url 'home:home-page' as home_url %}
 {% url 'userprofile:user-profile-update' as user_profile_update_url %}
 {% url 'posts:post-create' as post_create_url %}
+{% url 'change_password' as change_password_url %}
+{% url 'password_reset' as password_reset_url %}
 {% url 'userprofile:author-profile-page' user.username as user_profile_page %}
 <aside class="sidebar">
   <div class="toggle">
@@ -61,26 +63,27 @@
         {% else %}
         <li class="{% if request.path == user_profile_page %}active{% endif %}"><a
             href="{{user_profile_page}}"><span class="fas fa-user mr-3"></span>Profile</a></li>
-        <li class="{% if request.path == user_profile_update_url %}active{% endif %}"><a
-            href="{{user_profile_update_url}}"><span class="fas fa-user-edit mr-3"></span>Update Profile</a></li>
         <li><a href="{{logout_url}}"><span class="fas fa-sign-out-alt mr-3"></span>Logout</a></li>
-
-        {% endif %}
         <li class="accordion">
           <a href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false"
             aria-controls="collapseOne" class="collapsible">
-            <span class="fa fa-bomb mr-3"></span>Others
+            <span class="fa fa-users-cog mr-3"></span>More
           </a>
 
           <div id="collapseOne" class="collapse" aria-labelledby="headingOne">
             <div>
               <ul>
-                <li><a href="#">Other 1</a></li>
-                <li><a href="#">Others 2</a></li>
-                <li><a href="#">Other 3</a></li>
+                <li class="{% if request.path == user_profile_update_url %}active{% endif %}"><a
+                  href="{{user_profile_update_url}}"><span class="fas fa-user-edit mr-3"></span>Update Profile</a></li>
+                  <li class="{% if request.path == change_password_url %}active{% endif %}"><a
+                    href="{{change_password_url}}"><span class="fas fa-key mr-3"></span>Change Password</a></li>
+                    <li class="{% if request.path == password_reset_url %}active{% endif %}"><a
+                      href="{{password_reset_url}}"><span class="fas fa-lock mr-3"></span>Password Reset</a></li>
               </ul>
             </div>
           </div>
+        </li>
+        {% endif %}
 
       </ul>
     </div>

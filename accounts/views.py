@@ -1,4 +1,7 @@
 # External Import
+from django.shortcuts import render, redirect
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth import views as auth_views
 from django.contrib import messages
@@ -96,3 +99,21 @@ def activate_account(request, uidb64, token, backend='accounts.backends.EmailBac
         return redirect('home:home-page')
     else:
         return HttpResponse('Activation link is invalid!')
+
+
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(
+                request, 'Your password was successfully updated!')
+            return redirect('home:home-page')
+        else:
+            messages.error(request, 'Please correct the error')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'accounts/change_password.html', {
+        'form': form
+    })
