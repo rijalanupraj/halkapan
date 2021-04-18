@@ -45,6 +45,10 @@ class LoginForm(AuthenticationForm):
     def confirm_login_allowed(self, user):
         if not user.is_active:
             raise ValidationError(
-                ("This account is inactive."),
+                ("This account is inactive. Check your email"),
                 code='inactive',
             )
+
+
+class SendEmailVerificationForm(forms.Form):
+    email = forms.EmailField(required=True)
