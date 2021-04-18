@@ -14,8 +14,8 @@ Dashboard | HalkaPan
 <div class="content">
     <main class="container my-3" <div class="container-fluid">
         <div class="row">
-            <div class="card-body table-responsive table-striped table-light p-0" style="height: 500px;">
-                <table class="table table-head-fixed text-nowrap">
+            <div class="card-body table-responsive table-striped p-0">
+                <table class="table table-dark table-head-fixed text-nowrap">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -35,7 +35,8 @@ Dashboard | HalkaPan
                             <td>{% if user_object.is_active %}Active{% else %}InActive{% endif %}</td>
                             <td><img src="{{user_object.profile.image.url}}" width="50" height="50" alt=""></td>
                             <td>
-                                <a href="{% url 'myadmin:update-user' user_object.username %}" data-toggle="tooltip" title="Update">
+                                <a href="{% url 'myadmin:update-user' user_object.username %}" data-toggle="tooltip"
+                                    title="Update">
                                     <span class="material-icons text-primary">
                                         edit
                                     </span>

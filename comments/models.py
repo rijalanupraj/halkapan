@@ -41,7 +41,7 @@ class Comment(models.Model):
         ordering = ['-timestamp']
 
     def __str__(self):
-        return str(self.user.username)
+        return f"{self.id} {self.user.username} {self.content_type}"
 
     def children(self):
         return Comment.objects.filter(parent=self)

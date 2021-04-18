@@ -19,45 +19,32 @@ Dashboard | HalkaPan
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Title</th>
-                            <th>Author</th>
-                            <th>Status</th>
-                            <th>Image</th>
-                            <th>Actions</th>
+                            <th>User</th>
+                            <th>Content</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for object in object_list %}
                         <tr>
                             <td>{{object.id}}</td>
-                            <td>{{object.title}}</td>
-                            <td>{{object.author.user.username}}</td>
-                            <td>{% if object.active %}Active{% else %}Inactive{% endif %}</td>
-
-                            <td>{% if object.image %}<img src="{{object.image.url}}" width="50" height="50" alt="">{% endif %}</td>
+                            <td>{{object.user.username}}</td>
+                            <td>{{object.content|truncatechars:10}}</td>
                             <td>
-                                <a href="{% url 'myadmin:post-update' object.pk %}" data-toggle="tooltip" title="Update">
+
+                                <a href="{% url 'myadmin:comment-update' object.pk %}" data-toggle="tooltip"
+                                    title="Update">
                                     <span class="material-icons text-primary">
                                         edit
                                     </span>
                                 </a>
-
-                                <a href="{% url 'myadmin:post-delete' object.id %}" data-toggle="tooltip"
+                                <a href="{% url 'myadmin:comment-delete' object.pk %}" data-toggle="tooltip"
                                     title="Delete Post"
                                     onclick="return confirm('Are you sure want to delete this user?')">
                                     <span class="material-icons text-danger">
                                         delete_forever
                                     </span>
                                 </a>
-                                {% if not object.active %}<a
-                                    href="{% url 'myadmin:approve-post' object.id %}"
-                                    data-toggle="tooltip" title="Approve Post"><span class="material-icons">
-                                        check_circle
-                                    </span></a>
-                                {% else %} <a href="{% url 'myadmin:disapprove-post' object.id %}"
-                                    data-toggle="tooltip" title="Hide Post"><span class="material-icons">
-                                        visibility_off
-                                        </span></a>{% endif %}
                             </td>
                         </tr>
                         {% endfor %}

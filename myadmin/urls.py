@@ -15,6 +15,7 @@ urlpatterns = [
     path('make-normal-user/<str:username>',
          views.make_normal_user, name="make-normal-user"),
     path('posts/', views.AdminPostListView.as_view(), name='posts-list'),
+    path('comments/', views.AdminCommentListView.as_view(), name='comments-list'),
     path('posts/<int:id>/update',
          views.update_post, name='post-update'),
     path('posts/<int:id>/delete',
@@ -23,5 +24,9 @@ urlpatterns = [
          views.approve_post, name="approve-post"),
     path('posts/<int:id>/disapprove',
          views.disapprove_post, name="disapprove-post"),
+    path('comments/<int:id>/update',
+         views.update_comment, name='comment-update'),
+    path('comments/<int:id>/delete',
+         views.delete_comment, name='comment-delete'),
 
 ]

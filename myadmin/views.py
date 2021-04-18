@@ -1,4 +1,5 @@
 # External Import
+from comments.models import Comment
 from django.shortcuts import render
 from django.views.generic import (
     ListView,
@@ -21,17 +22,40 @@ from .decorators import *
 from posts.models import Post
 UserModel = get_user_model()
 
+
 @admin_only
 def dashboard(request):
-    return render(request, 'myadmin/dashboard.html')
+    post_count = Post.objects.all().count()
+    likes_count = 0
+    for post in Post.objects.all():
+        likes_count += post.likes.all().count()
+    user_count = Profile.objects.all().count()
+    featured_post = Post.objects.featured()[:6]
+    user = set()
+    for post in Post.objects.all().order_by("likes"):
+        user.add(post.author)
+    author = set()
+    for post in Post.objects.all():
+        author.add(post.author)
+    author_count = len(author)
+
+    context = {
+        'post_count': post_count,
+        'likes_count': likes_count,
+        'user_count': user_count,
+        'author_count': author_count,
+    }
+    return render(request, 'myadmin/dashboard.html', context)
 
 
-class UserListView(ListView, PermissionRequiredMixin):
-    permission_required = 'is_staff'
+class UserListView(ListView, UserPassesTestMixin, LoginRequiredMixin):
     template_name = "myadmin/admin-users-view.html"
 
     def get_queryset(self):
         return UserModel.objects.all()
+
+    def test_func(self):
+        return self.request.user.is_staff or self.request.user.is_superuser
 
 
 @admin_only
@@ -109,23 +133,10 @@ def update_post(request, id):
     return render(request, 'myadmin/post-update-form.html', context)
 
 
-# class AdminPostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-#     model = Post
-#     fields = ['author', 'title', 'content',
-#               'draft', 'anonymous', 'image', 'is_active']
-#     template_name = "myadmin/post-update-form.html"
-
-#     def test_func(self):
-#         # post = self.get_object()
-#         # if self.request.user.is_staff:
-#         #     return True
-#         return True
-
-
 @admin_only
 def approve_post(self, id):
     post = Post.objects.get(id=id)
-    post.is_active = True
+    post.active = True
     post.save()
     return redirect('/myadmin/posts')
 
@@ -133,6 +144,34 @@ def approve_post(self, id):
 @admin_only
 def disapprove_post(self, id):
     post = Post.objects.get(id=id)
-    post.is_active = False
+    post.active = False
     post.save()
     return redirect('/myadmin/posts')
+
+
+class AdminCommentListView(ListView, PermissionRequiredMixin):
+    model = Comment
+    permission_required = 'is_staff'
+    template_name = "myadmin/admin-comment-view.html"
+
+
+@admin_only
+def update_comment(request, id):
+    comment = Comment.objects.get(id=id)
+    if request.method == 'POST':
+        form = CommentAdminForm(request.POST, request.FILES, instance=comment)
+        if form.is_valid():
+            form.save()
+
+            return redirect('/myadmin/comments')
+    context = {
+        'form': CommentAdminForm(instance=comment)
+    }
+    return render(request, 'myadmin/comment-update-form.html', context)
+
+
+@admin_only
+def delete_comment(request, id):
+    comment = Comment.objects.get(id=id)
+    comment.delete()
+    return redirect('/myadmin/comments')

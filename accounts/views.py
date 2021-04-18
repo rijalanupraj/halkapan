@@ -58,7 +58,7 @@ def resend_verification(request):
 def register(request):
     form = forms.UserRegistrationForm(request.POST or None)
     if request.user.is_authenticated:
-        return redirect('index')
+        return redirect('home:home-page')
     if request.method == 'POST':
         if form.is_valid():
             user = form.save(commit=False)
