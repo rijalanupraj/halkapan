@@ -12,47 +12,48 @@ Dashboard | HalkaPan
 <!-- Main Content -->
 {% block main_content %}
 <div class="content">
-    <main class="container my-3" <div class="container-fluid">
-        <div class="row">
-            <div class="card-body table-responsive table-striped p-0">
-                <table class="table table-dark table-head-fixed text-nowrap">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>User</th>
-                            <th>Content</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for object in object_list %}
-                        <tr>
-                            <td>{{object.id}}</td>
-                            <td>{{object.user.username}}</td>
-                            <td>{{object.content|truncatechars:10}}</td>
-                            <td>
+    <main class="container my-3">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="card-body table-responsive table-striped p-0">
+                    <table class="table table-dark table-head-fixed text-nowrap">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>User</th>
+                                <th>Content</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for object in object_list %}
+                            <tr>
+                                <td>{{object.id}}</td>
+                                <td>{{object.user.username}}</td>
+                                <td>{{object.content|truncatechars:10}}</td>
+                                <td>
 
-                                <a href="{% url 'myadmin:comment-update' object.pk %}" data-toggle="tooltip"
-                                    title="Update">
-                                    <span class="material-icons text-primary">
-                                        edit
-                                    </span>
-                                </a>
-                                <a href="{% url 'myadmin:comment-delete' object.pk %}" data-toggle="tooltip"
-                                    title="Delete Post"
-                                    onclick="return confirm('Are you sure want to delete this user?')">
-                                    <span class="material-icons text-danger">
-                                        delete_forever
-                                    </span>
-                                </a>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                                    <a href="{% url 'myadmin:comment-update' object.pk %}" data-toggle="tooltip"
+                                        title="Update">
+                                        <span class="material-icons text-primary">
+                                            edit
+                                        </span>
+                                    </a>
+                                    <a href="{% url 'myadmin:comment-delete' object.pk %}" data-toggle="tooltip"
+                                        title="Delete Post"
+                                        onclick="return confirm('Are you sure want to delete this user?')">
+                                        <span class="material-icons text-danger">
+                                            delete_forever
+                                        </span>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
-
-        </div>
 
     </main>
 </div>

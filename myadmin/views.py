@@ -178,6 +178,18 @@ def delete_comment(request, id):
     comment.delete()
     return redirect('/myadmin/comments')
 
+@admin_only
+def create_tag(request):
+    form = TagAdminForm(request.POST or None)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return redirect('/myadmin/tags')
+    context = {
+        'form': form
+    }
+    return render(request, 'myadmin/tag-create-form.html', context)
+
 
 def admin_tag_list(request):
     tag = Tag.objects.all()
@@ -198,7 +210,7 @@ def update_tag(request, id):
 
             return redirect('/myadmin/tags')
     context = {
-        'form': TagAdminForm(instance=comment)
+        'form': TagAdminForm(instance=tag)
     }
     return render(request, 'myadmin/tag-update-form.html', context)
 

@@ -12,61 +12,62 @@ Dashboard | HalkaPan
 <!-- Main Content -->
 {% block main_content %}
 <div class="content">
-    <main class="container my-3" <div class="container-fluid">
-        <div class="row">
-            <div class="card-body table-responsive table-striped p-0">
-                <table class="table table-dark table-head-fixed text-nowrap">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Username</th>
-                            <th>Email</th>
-                            <th>Status</th>
-                            <th>Profile Pic</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for user_object in object_list %}
-                        <tr>
-                            <td>{{user_object.id}}</td>
-                            <td>{{user_object.username}}</td>
-                            <td>{{user_object.email}}</td>
-                            <td>{% if user_object.is_active %}Active{% else %}InActive{% endif %}</td>
-                            <td><img src="{{user_object.profile.image.url}}" width="50" height="50" alt=""></td>
-                            <td>
-                                <a href="{% url 'myadmin:update-user' user_object.username %}" data-toggle="tooltip"
-                                    title="Update">
-                                    <span class="material-icons text-primary">
-                                        edit
-                                    </span>
-                                </a>
-                                {% if not request.user == user_object %}
-                                <a href="{% url 'myadmin:delete-user' user_object.username %}" data-toggle="tooltip"
-                                    title="Delete User"
-                                    onclick="return confirm('Are you sure want to delete this user?')">
-                                    <span class="material-icons text-danger">
-                                        delete_forever
-                                    </span>
-                                </a>
-                                {% endif %}
-                                {% if not user_object.is_staff %}<a
-                                    href="{% url 'myadmin:make-staff' user_object.username %}" data-toggle="tooltip"
-                                    title="Make Admin"><span class="material-icons">
-                                        person_add
-                                    </span></a>
-                                {% else %} <a href="{% url 'myadmin:make-normal-user' user_object.username %}"
-                                    data-toggle="tooltip" title="Remove Admin"><span class="material-icons">
-                                        remove_circle_outline
-                                    </span></a>{% endif %}
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+    <main class="container my-3">
+        <<div class="container-fluid">
+            <div class="row">
+                <div class="card-body table-responsive table-striped p-0">
+                    <table class="table table-dark table-head-fixed text-nowrap">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Status</th>
+                                <th>Profile Pic</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for user_object in object_list %}
+                            <tr>
+                                <td>{{user_object.id}}</td>
+                                <td>{{user_object.username}}</td>
+                                <td>{{user_object.email}}</td>
+                                <td>{% if user_object.is_active %}Active{% else %}InActive{% endif %}</td>
+                                <td><img src="{{user_object.profile.image.url}}" width="50" height="50" alt=""></td>
+                                <td>
+                                    <a href="{% url 'myadmin:update-user' user_object.username %}" data-toggle="tooltip"
+                                        title="Update">
+                                        <span class="material-icons text-primary">
+                                            edit
+                                        </span>
+                                    </a>
+                                    {% if not request.user == user_object %}
+                                    <a href="{% url 'myadmin:delete-user' user_object.username %}" data-toggle="tooltip"
+                                        title="Delete User"
+                                        onclick="return confirm('Are you sure want to delete this user?')">
+                                        <span class="material-icons text-danger">
+                                            delete_forever
+                                        </span>
+                                    </a>
+                                    {% endif %}
+                                    {% if not user_object.is_staff %}<a
+                                        href="{% url 'myadmin:make-staff' user_object.username %}" data-toggle="tooltip"
+                                        title="Make Admin"><span class="material-icons">
+                                            person_add
+                                        </span></a>
+                                    {% else %} <a href="{% url 'myadmin:make-normal-user' user_object.username %}"
+                                        data-toggle="tooltip" title="Remove Admin"><span class="material-icons">
+                                            remove_circle_outline
+                                        </span></a>{% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
 
-        </div>
+            </div>
 
     </main>
 </div>
