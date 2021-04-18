@@ -21,7 +21,7 @@ from .decorators import *
 from posts.models import Post
 UserModel = get_user_model()
 
-
+@admin_only
 def dashboard(request):
     return render(request, 'myadmin/dashboard.html')
 
