@@ -1,0 +1,31 @@
+{% extends 'myadmin/adminbase/admin-base.html' %}
+{% load bootstrap %}
+{% block title %}
+Dashboard | HalkaPan
+{% endblock %}
+<!-- Main Content -->
+{% block main_content %}
+<div class="content">
+    <main>
+        <div class="container-fluid">
+            <!-- Small boxes (Stat box) -->
+            <div class="row">
+                <div class="col-md-8 my-3 mx-auto">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <fieldset class="form-group">
+                            <legend class="border-bottom mb-4">Create User</legend>
+                            {{form.media}}
+                            {{u_form | bootstrap_horizontal }}
+                        </fieldset>
+                        <div class="form-group">
+                            <button class="btn btn-outline-info m-3" type="submit">Create</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+{% endblock %}

@@ -50,6 +50,22 @@ def dashboard(request):
     return render(request, 'myadmin/dashboard.html', context)
 
 
+@admin_only
+def create_user(request):
+    u_form = UserUpdateForm(request.POST or None)
+    if request.method == 'POST':
+        if u_form.is_valid():
+            password = u_form.cleaned_data['password']
+            user = u_form.save(commit=False)
+            user.set_password(password)
+            user.save()
+            return redirect('/myadmin/users')
+    context = {
+        'u_form': u_form,
+    }
+    return render(request, 'myadmin/create-user-form.html', context)
+
+
 class UserListView(ListView, UserPassesTestMixin, LoginRequiredMixin):
     template_name = "myadmin/admin-users-view.html"
 
@@ -68,8 +84,11 @@ def update_user(request, username):
             request.POST, request.FILES, instance=user.profile)
         u_form = UserUpdateForm(request.POST, instance=user)
         if p_form.is_valid() and u_form.is_valid():
-            u_form.save()
+            password = u_form.cleaned_data['password']
+            user = u_form.save(commit=False)
+            user.set_password(password)
             p_form.save()
+            user.save()
             return redirect('/myadmin/users')
     else:
         p_form = ProfileUpdateForm(instance=user.profile)
@@ -177,6 +196,7 @@ def delete_comment(request, id):
     comment = Comment.objects.get(id=id)
     comment.delete()
     return redirect('/myadmin/comments')
+
 
 @admin_only
 def create_tag(request):
