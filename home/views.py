@@ -2,7 +2,7 @@
 from django.shortcuts import render
 from django.conf import settings
 from django.contrib import messages
-
+from django.shortcuts import redirect
 # Internal Import
 from posts.models import Post
 from userprofile.models import Profile
@@ -11,6 +11,8 @@ User = settings.AUTH_USER_MODEL
 
 
 def home(request):
+    if request.user.is_staff:
+        return redirect("myadmin:admin-dashboard")
     post_count = Post.objects.all().count()
     top_post = Post.objects.all().order_by("likes")[:3]
     likes_count = 0
