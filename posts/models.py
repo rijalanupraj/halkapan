@@ -7,6 +7,9 @@ import random
 from django.db.models import Q
 from ckeditor.fields import RichTextField
 
+from django.contrib.contenttypes.models import ContentType
+from comments.models import Comment
+
 # Create your models here.
 from .utils import unique_slug_generator, get_read_time
 from userprofile.models import Profile
@@ -98,6 +101,18 @@ class Post(models.Model):
 
     def get_number_of_likes(self):
         return self.likes.count()
+
+    @property
+    def comments(self):
+        instance = self
+        qs = Comment.objects.filter_by_instance(instance)
+        return qs
+
+    @property
+    def get_content_type(self):
+        instance = self
+        content_type = ContentType.objects.get_for_model(instance.__class__)
+        return content_type
 
 
 def post_pre_save_receiver(sender, instance, *args, **kwargs):

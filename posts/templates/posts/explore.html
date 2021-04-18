@@ -22,6 +22,7 @@ HalkaPan
 
         </div>
     </div>
+    {% if object_list.count > 2 %}
     <div class="d-flex d-none position-fixed" style="bottom:10vh;left:46vw">
         <button class="btn btn-secondary loading">
             <span class="spinner-border spinner-border-sm">
@@ -38,6 +39,7 @@ HalkaPan
 
         </ul>
     </div>
+    {% endif %}
 </div>
 
 {% endblock %}

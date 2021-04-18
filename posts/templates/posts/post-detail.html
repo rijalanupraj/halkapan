@@ -72,6 +72,28 @@
                             class="badge badge-info">{{object.likes.count}}</span></a>
                     {% endif %}
                 </div>
+                <div id="accordion">
+
+                <div class="card">
+                    <div class="card-header text-center" id="CommentHideShow">
+                      <h3 class="mb-0">
+                        <button class="btn btn-secondary" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                          Comments
+                          <span class="material-icons icon">
+                            chat
+                            </span>
+                        </button>
+                      </h3>
+                    </div>
+                </div>
+                </div>
+                <div id="collapseOne" class="collapse collapsed" aria-labelledby="CommentHideShow" data-parent="#accordion">
+                    <div class="card-body">
+                        {% include 'posts/components/comments.html' with object=object comments=comments comment_form=comment_form %}
+
+                    </div>
+                  </div>
+
             </div>
         </div>
     </div>
@@ -80,4 +102,5 @@
     {% block additional_body %}
     <script src="{% static 'posts/js/confirm-delete.js' %}"></script>
     <script src="{% static 'posts/js/blog-detail-page-post-like-toggle.js' %}"></script>
+    <script src="{% static 'posts/js/comments.js' %}"></script>
     {% endblock %}

@@ -1,0 +1,71 @@
+{% load crispy_forms_tags %}
+{% load bootstrap %}
+
+<div class="container">
+  {% if user.is_authenticated %}
+            <div class="card">
+                <h3 class="card header text-center p-3">Comments</h3>
+                <div class="card-body">
+                    <form method="POST" action="">
+                        {% csrf_token %}
+                          <div class="form-group">
+                            {{comment_form|bootstrap_horizontal}}
+                        </div>
+                        <button type="submit" class="btn btn-secondary">Comment</button>
+                    </form>
+                </div>
+            </div><br>
+    {% endif %}
+
+
+            {% if comments %}
+    {% for comment in comments %}
+    <div class="card">
+        <div class="card-header">
+          {{comment.user.username}}
+          <span class="float-right">{{comment.timestamp|timesince}} ago</span>
+        </div>
+        <div class="card-body">
+          <blockquote class="blockquote mb-0">
+            <p>{{comment.content}}</p>
+            <footer class="blockquote-footer">{% if comment.children.count > 0 %}{{comment.children.count}}replies{% endif %}<a class="comment-reply-btn float-right" href="#">Reply <i class="fa fa-arrow-down" aria-hidden="true"></i>
+            </a></footer>
+            <div class="comment-reply" style="display: none;">
+              {% for child_comment in comment.children %}
+        <br>
+        <div class="card">
+        <div class="card-header">
+          {{child_comment.user.username}}
+          <span class="float-right">{{child_comment.timestamp|timesince}} ago</span>
+        </div>
+        <div class="card-body">
+          <blockquote class="blockquote mb-0">
+            <p>{{child_comment.content}}</p>
+          </blockquote>
+        </div>
+      </div><br>
+      {% endfor %}
+
+
+      <form method="POST" action="">
+        {% csrf_token %}
+          <div class="form-group">
+            {{comment_form|crispy}}
+            <input type="hidden" name="parent_id" value="{{comment.id}}">
+        </div>
+        <button type="submit" class="btn btn-primary">Reply</button>
+    </form>
+      </div>
+          </blockquote>
+        </div>
+      </div><br>
+
+
+    {% endfor %}
+    {% endif %}
+
+
+
+
+
+</div>
