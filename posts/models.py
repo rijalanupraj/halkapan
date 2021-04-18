@@ -13,6 +13,7 @@ from comments.models import Comment
 # Create your models here.
 from .utils import unique_slug_generator, get_read_time
 from userprofile.models import Profile
+from tags.models import Tag
 
 
 def get_filename_ext(filepath):
@@ -82,6 +83,7 @@ class Post(models.Model):
     featured = models.BooleanField(default=False)
     anonymous = models.BooleanField(default=False)
     read_time = models.IntegerField(default=0)
+    tags = models.ManyToManyField(Tag, blank=True)
 
     image = models.ImageField(upload_to=upload_image_path,
                               null=True, blank=True)

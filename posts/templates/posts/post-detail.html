@@ -51,7 +51,7 @@
 
                 <div class="after-post-tags">
                     <ul class="tags">
-                        {% for tag in object.tag_set.all %}
+                        {% for tag in object.tags.all %}
                         <li><a href="{% url 'tags:tag-list-view' tag.slug %}">{{tag}}</a></li>
 
                         {% endfor %}

@@ -98,7 +98,7 @@ class PostDetailView(DetailView):
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
-    fields = ['title', 'content', 'draft', 'anonymous', 'image']
+    fields = ['title', 'content', 'draft', 'anonymous', 'image', 'tags']
     template_name = "posts/post-create-form.html"
 
     def form_valid(self, form):
@@ -108,7 +108,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
-    fields = ['title', 'content', 'draft', 'anonymous', 'image']
+    fields = ['title', 'content', 'draft', 'anonymous', 'image', 'tags']
     template_name = "posts/post-update-form.html"
 
     def form_valid(self, form):

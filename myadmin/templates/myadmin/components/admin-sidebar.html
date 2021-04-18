@@ -3,6 +3,7 @@
 {% url 'myadmin:admin-dashboard' as admin_dashboard_url %}
 {% url 'myadmin:posts-list' as posts_list_url %}
 {% url 'myadmin:comments-list' as comments_list_url %}
+{% url 'myadmin:tags-list' as tags_list_url %}
 {% url 'logout' as logout_url %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-mattBlackLight fixed-top">
     <button class="navbar-toggler sideMenuToggler" type="button">
@@ -45,6 +46,14 @@
                             chat
                         </span>
                         <span class="text">Comments</span>
+                    </a>
+                </li>
+                <li class="nav-item {% if request.path == tags_list_url %}bg-mattBlackDark{% endif %}">
+                    <a href="{{tags_list_url}}" class="nav-link px-2">
+                        <span class="material-icons icon">
+                            local_offer
+                        </span>
+                        <span class="text">Tags</span>
                     </a>
                 </li>
                 <li class="nav-item">

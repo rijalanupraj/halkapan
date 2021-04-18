@@ -1,0 +1,60 @@
+{% extends 'myadmin/adminbase/admin-base.html' %}
+
+{% load static %}}
+{% block title %}
+Dashboard | HalkaPan
+{% endblock %}
+
+{% block additional_head %}
+<link rel="stylesheet" href="{% static 'myadmin/css/admin-table.css' %}">
+{% endblock %}
+
+<!-- Main Content -->
+{% block main_content %}
+<div class="content">
+    <main class="container my-3" <div class="container-fluid">
+        <div class="row">
+            <div class="card-body table-responsive table-striped p-0">
+                <table class="table table-dark table-head-fixed text-nowrap">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tag Name</th>
+                            <th>Slug</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for object in object_list %}
+                        <tr>
+                            <td>{{object.id}}</td>
+                            <td>{{object.title}}</td>
+                            <td>{{object.slug|truncatechars:10}}</td>
+                            <td>
+
+                                <a href="{% url 'myadmin:tag-update' object.pk %}" data-toggle="tooltip"
+                                    title="Update">
+                                    <span class="material-icons text-primary">
+                                        edit
+                                    </span>
+                                </a>
+                                <a href="{% url 'myadmin:tag-delete' object.pk %}" data-toggle="tooltip"
+                                    title="Delete Tag"
+                                    onclick="return confirm('Are you sure want to delete this user?')">
+                                    <span class="material-icons text-danger">
+                                        delete_forever
+                                    </span>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </main>
+</div>
+
+{% endblock %}

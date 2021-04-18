@@ -6,7 +6,7 @@ from posts.models import Post
 from userprofile.models import Profile
 from accounts.models import User
 from comments.models import Comment
-
+from tags.models import Tag
 
 class PostForm(forms.ModelForm):
     class Meta:
@@ -29,4 +29,10 @@ class UserUpdateForm(forms.ModelForm):
 class CommentAdminForm(forms.ModelForm):
     class Meta:
         model = Comment
+        fields = '__all__'
+
+
+class TagAdminForm(forms.ModelForm):
+    class Meta:
+        model = Tag
         fields = '__all__'

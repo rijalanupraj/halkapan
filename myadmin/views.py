@@ -16,7 +16,7 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 
 from django.contrib.auth import get_user_model
 from .forms import *
-
+from tags.models import Tag
 # Internal Import
 from .decorators import *
 from posts.models import Post
@@ -38,12 +38,14 @@ def dashboard(request):
     for post in Post.objects.all():
         author.add(post.author)
     author_count = len(author)
+    comment_count = Comment.objects.all().count()
 
     context = {
         'post_count': post_count,
         'likes_count': likes_count,
         'user_count': user_count,
         'author_count': author_count,
+        'comment_count': comment_count,
     }
     return render(request, 'myadmin/dashboard.html', context)
 
@@ -175,3 +177,34 @@ def delete_comment(request, id):
     comment = Comment.objects.get(id=id)
     comment.delete()
     return redirect('/myadmin/comments')
+
+
+def admin_tag_list(request):
+    tag = Tag.objects.all()
+    template_name = "myadmin/admin-tag-view.html"
+    context = {
+        'object_list': tag,
+    }
+    return render(request, template_name, context)
+
+
+@admin_only
+def update_tag(request, id):
+    tag = Tag.objects.get(id=id)
+    if request.method == 'POST':
+        form = TagAdminForm(request.POST, request.FILES, instance=tag)
+        if form.is_valid():
+            form.save()
+
+            return redirect('/myadmin/tags')
+    context = {
+        'form': TagAdminForm(instance=comment)
+    }
+    return render(request, 'myadmin/tag-update-form.html', context)
+
+
+@admin_only
+def delete_tag(request, id):
+    tag = Tag.objects.get(id=id)
+    tag.delete()
+    return redirect('/myadmin/tags')

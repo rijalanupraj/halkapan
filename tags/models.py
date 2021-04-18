@@ -5,7 +5,6 @@ from django.urls import reverse
 
 # Internal Import
 from posts.utils import unique_slug_generator
-from posts.models import Post
 
 
 class Tag(models.Model):
@@ -13,7 +12,6 @@ class Tag(models.Model):
     slug = models.SlugField(blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=True)
-    posts = models.ManyToManyField(Post, blank=True)
 
     def __str__(self):
         return f"{self.title}"

@@ -12,4 +12,4 @@ class PostTagListView(ListView):
 
     def get_queryset(self):
         tag = get_object_or_404(Tag, slug=self.kwargs['slug'])
-        return Post.objects.all().filter(tag=tag)
+        return Post.objects.all().filter(tags=tag)
