@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'tags',
     'myadmin',
     'home',
+    'comments',
 
     # Other packages
     'bootstrapform',
