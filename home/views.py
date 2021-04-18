@@ -1,6 +1,7 @@
 # External Import
 from django.shortcuts import render
 from django.conf import settings
+from django.contrib import messages
 
 # Internal Import
 from posts.models import Post
@@ -28,7 +29,6 @@ def home(request):
     user = user[:4]
     top_post = set(top_post)
     top_post = list(top_post)
-
     context = {
         'post_count': post_count,
         'likes_count': likes_count,
