@@ -4,6 +4,7 @@
 {% url 'myadmin:posts-list' as posts_list_url %}
 {% url 'myadmin:comments-list' as comments_list_url %}
 {% url 'myadmin:tags-list' as tags_list_url %}
+{% url 'myadmin:authors-list' as authors_list_url %}
 {% url 'logout' as logout_url %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-mattBlackLight fixed-top">
     <button class="navbar-toggler sideMenuToggler" type="button">
@@ -54,6 +55,14 @@
                             local_offer
                         </span>
                         <span class="text">Tags</span>
+                    </a>
+                </li>
+                <li class="nav-item {% if request.path == authors_list_url %}bg-mattBlackDark{% endif %}">
+                    <a href="{{authors_list_url}}" class="nav-link px-2">
+                        <span class="material-icons icon">
+                            record_voice_over
+                        </span>
+                        <span class="text">Authors</span>
                     </a>
                 </li>
                 <li class="nav-item">

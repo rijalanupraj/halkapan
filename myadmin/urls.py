@@ -18,6 +18,7 @@ urlpatterns = [
          views.make_normal_user, name="make-normal-user"),
     path('posts/', views.AdminPostListView.as_view(), name='posts-list'),
     path('comments/', views.AdminCommentListView.as_view(), name='comments-list'),
+    path('authors/', views.author_list_page, name='authors-list'),
     path('tags/', views.admin_tag_list, name='tags-list'),
     path('posts/<int:id>/update',
          views.update_post, name='post-update'),

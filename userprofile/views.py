@@ -4,7 +4,10 @@ from django.views.generic import ListView, DetailView
 from django.contrib.auth import get_user_model
 import json
 from django.contrib.auth.decorators import login_required
-
+from django.contrib.auth.mixins import (
+    LoginRequiredMixin,
+    UserPassesTestMixin
+)
 # Internal Import
 from . import models
 from posts.models import Post
@@ -13,7 +16,7 @@ from .forms import UserUpdateForm, ProfileUpdateForm
 User = get_user_model()
 
 
-class AllUserProfileListView(ListView):
+class AllUserProfileListView(UserPassesTestMixin, ListView):
     """List View Of All the Users"""
     model = models.Profile
     template_name = 'userprofile/all_user_profile.html'
@@ -37,8 +40,12 @@ class AllUserProfileListView(ListView):
                 user__username__icontains=query)
         return profilesQuerySet
 
+    def test_func(self):
+        if self.request.user.is_authenticated:
+            return not self.request.user.is_staff
+        return True
 
-class AuthorDetailView(DetailView):
+class AuthorDetailView(UserPassesTestMixin, DetailView):
 
     model = models.Profile
     slug_field = "user__username"
@@ -71,6 +78,10 @@ class AuthorDetailView(DetailView):
         context['drafts'] = drafts
         return context
 
+    def test_func(self):
+        if self.request.user.is_authenticated:
+            return not self.request.user.is_staff
+        return True
 
 @login_required
 def follow_toggle(request, username):

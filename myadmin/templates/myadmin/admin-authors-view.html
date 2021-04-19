@@ -1,0 +1,53 @@
+{% extends 'myadmin/adminbase/admin-base.html' %}
+
+{% load static %}}
+{% block title %}
+Dashboard | HalkaPan
+{% endblock %}
+
+{% block additional_head %}
+<link rel="stylesheet" href="{% static 'myadmin/css/admin-table.css' %}">
+{% endblock %}
+
+<!-- Main Content -->
+{% block main_content %}
+<div class="content">
+    <main class="container my-3">
+        <div class="container-fluid">
+            <div class="row">
+                <a href="{% url 'myadmin:user-create' %}" class="btn btn-secondary my-2">Create New User</a>
+                <div class="card-body table-responsive table-striped p-0">
+                    <table class="table table-dark table-head-fixed text-nowrap">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Username</th>
+                                <th>Post</th>
+                                <th>Status</th>
+                                <th>Profile Pic</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for user_object in object_list %}
+                            <tr>
+                                <td>{{user_object.user.id}}</td>
+                                <td>{{user_object.user.username}}</td>
+                                <td>{{user_object.post_set.all.count}}</td>
+                                <td>{% if user_object.user.is_active %}Active{% else %}InActive{% endif %}</td>
+                                <td><img src="{{user_object.image.url}}" width="50" height="50" alt=""></td>
+                                <td>
+
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+    </main>
+</div>
+
+{% endblock %}

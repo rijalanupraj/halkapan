@@ -173,7 +173,7 @@ def disapprove_post(self, id):
     return redirect('myadmin:posts-list')
 
 
-class AdminCommentListView(PermissionRequiredMixin, ListView):
+class AdminCommentListView(UserPassesTestMixin, ListView):
     model = Comment
     template_name = "myadmin/admin-comment-view.html"
 
@@ -245,3 +245,16 @@ def delete_tag(request, id):
     tag = Tag.objects.get(id=id)
     tag.delete()
     return redirect('myadmin:tags-list')
+
+
+@admin_only
+def author_list_page(request):
+    user = set()
+    for post in Post.objects.all():
+        user.add(post.author)
+
+    user = list(user)
+    context = {
+        'object_list': user,
+    }
+    return render(request, 'myadmin/admin-authors-view.html', context)

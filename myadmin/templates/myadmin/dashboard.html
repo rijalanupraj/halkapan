@@ -35,13 +35,13 @@ Dashboard | HalkaPan
                         <div class="card-header text-center">Authors</div>
                         <div class="card-body text-center">
                             <h5 class="card-title">{{author_count}}<h5>
-                                    <p class="card-text"><i class="fas fa-at fa-3x"></i></p>
+                                    <p class="card-text"><a class="text-white" href="{% url 'myadmin:authors-list' %}"><i class="fas fa-at fa-3x"></i></a></p>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-6 my-3">
                     <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
-                        <div class="card-header text-center">Likes</div>
+                        <div class="card-header text-center">Total Likes</div>
                         <div class="card-body text-center">
                             <h5 class="card-title">{{likes_count}}<h5>
                                     <p class="card-text"><i class="fas fa-heart fa-3x"></i></p>
