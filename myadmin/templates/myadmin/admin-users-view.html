@@ -14,8 +14,15 @@ Dashboard | HalkaPan
 <div class="content">
     <main class="container my-3">
         <div class="container-fluid">
+            <div class="container">
+                <form method="GET" action="{% url 'myadmin:users-list' %}" class="search-form">
+                    <input name="q" type="search" placeholder="Search Here" value="{{query}}"
+                        aria-describedby="button-addon2" class="form-control text-white border-0 bg-dark">
+                </form>
+            </div>
             <div class="row">
                 <a href="{% url 'myadmin:user-create' %}" class="btn btn-secondary my-2">Create New User</a>
+
                 <div class="card-body table-responsive table-striped p-0">
                     <table class="table table-dark table-head-fixed text-nowrap">
                         <thead>

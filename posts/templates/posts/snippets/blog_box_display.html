@@ -21,7 +21,7 @@
             <div class="wrapfooter">
                 <span class="meta-footer-thumb">
                     {% if not obj.anonymous %}
-                    <a href=""><img class="author-thumb" src="{{ obj.author.image.url }}"
+                    <a href="{% url 'userprofile:author-profile-page' obj.author.user.username %}"><img class="author-thumb" src="{{ obj.author.image.url }}"
                             alt="{{obj.author.user.username}}"></a>
 
                     {% else %}

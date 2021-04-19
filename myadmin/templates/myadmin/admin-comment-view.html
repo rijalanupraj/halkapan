@@ -14,7 +14,13 @@ Dashboard | HalkaPan
 <div class="content">
     <main class="container my-3">
         <div class="container-fluid">
-            <div class="row">
+            <div class="container">
+                <form method="GET" action="{% url 'myadmin:comments-list' %}" class="search-form">
+                    <input name="q" type="search" placeholder="Search Here" value="{{query}}"
+                        aria-describedby="button-addon2" class="form-control text-white border-0 bg-dark">
+                </form>
+            </div>
+            <div class="row mt-2">
                 <div class="card-body table-responsive table-striped p-0">
                     <table class="table table-dark table-head-fixed text-nowrap">
                         <thead>

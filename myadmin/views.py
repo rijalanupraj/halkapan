@@ -70,11 +70,25 @@ def create_user(request):
 class UserListView(UserPassesTestMixin, LoginRequiredMixin, ListView):
     template_name = "myadmin/admin-users-view.html"
 
-    def get_queryset(self):
-        return UserModel.objects.all()
-
     def test_func(self):
         return self.request.user.is_staff or self.request.user.is_superuser
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        query = self.request.GET.get('q')
+        if query is not None:
+            context["query"] = query
+        return context
+
+    def get_queryset(self):
+        request = self.request
+        method_dict = request.GET
+        query = method_dict.get('q', None)
+        userQuerySet = UserModel.objects.all()
+        if query and query != '':
+            userQuerySet = userQuerySet.filter(
+                username__icontains=query)
+        return userQuerySet
 
 
 @admin_only
@@ -128,11 +142,24 @@ class AdminPostListView(UserPassesTestMixin, ListView):
     model = Post
     template_name = "myadmin/admin-post-view.html"
 
-    def get_queryset(self):
-        return Post.objects.foradmin()
-
     def test_func(self):
         return self.request.user.is_staff or self.request.user.is_superuser
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        query = self.request.GET.get('q')
+        if query is not None:
+            context["query"] = query
+        return context
+
+    def get_queryset(self):
+        request = self.request
+        method_dict = request.GET
+        query = method_dict.get('q', None)
+        postQuerySet = Post.objects.foradmin()
+        if query and query != '':
+            return Post.objects.search(query)
+        return postQuerySet
 
 
 @admin_only
@@ -180,6 +207,23 @@ class AdminCommentListView(UserPassesTestMixin, ListView):
     def test_func(self):
         return self.request.user.is_staff or self.request.user.is_superuser
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        query = self.request.GET.get('q')
+        if query is not None:
+            context["query"] = query
+        return context
+
+    def get_queryset(self):
+        request = self.request
+        method_dict = request.GET
+        query = method_dict.get('q', None)
+        QuerySet = Comment.objects.all()
+        if query and query != '':
+            QuerySet = QuerySet.filter(
+                content__icontains=query)
+        return QuerySet
+
 
 @admin_only
 def update_comment(request, id):
@@ -214,6 +258,31 @@ def create_tag(request):
         'form': form
     }
     return render(request, 'myadmin/tag-create-form.html', context)
+
+
+class AdminTagListView(UserPassesTestMixin, ListView):
+    model = Tag
+    template_name = "myadmin/admin-tag-view.html"
+
+    def test_func(self):
+        return self.request.user.is_staff or self.request.user.is_superuser
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        query = self.request.GET.get('q')
+        if query is not None:
+            context["query"] = query
+        return context
+
+    def get_queryset(self):
+        request = self.request
+        method_dict = request.GET
+        query = method_dict.get('q', None)
+        QuerySet = Tag.objects.all()
+        if query and query != '':
+            QuerySet = QuerySet.filter(
+                title__icontains=query)
+        return QuerySet
 
 
 def admin_tag_list(request):
