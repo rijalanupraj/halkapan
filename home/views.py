@@ -14,11 +14,11 @@ def home(request):
     if request.user.is_staff:
         return redirect("myadmin:admin-dashboard")
     post_count = Post.objects.all().count()
-    top_post = Post.objects.all().order_by("likes")[:3]
+    top_post = Post.objects.all().order_by("likes").distinct()[:3]
     likes_count = 0
     for post in Post.objects.all():
         likes_count += post.likes.all().count()
-    user_count = Profile.objects.all().count()
+    user_count = Profile.objects.all().filter(user__is_staff=0).count()
     featured_post = Post.objects.featured()[:6]
     user = set()
     for post in Post.objects.all().order_by("likes"):

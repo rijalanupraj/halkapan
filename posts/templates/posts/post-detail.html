@@ -27,7 +27,7 @@
                         <a class="link-dark"
                             href="{% url 'userprofile:author-profile-page' object.author.user.username %}">{{object.author.user.username}}</a><br>
                         <span class="author-description">
-                            User bio here</span><br>
+                          {% if object.author.bio %}  {{object.author.bio}}{% endif %}</span><br>
                         {% else %}
                         <div class="col-md-2">
                             <img class="author-thumb"
@@ -110,15 +110,13 @@
             {% if users_other_posts %}
             <hr>
             <h3 class=" text-center my-4 text-success">Other Post From This User</h3>
-        <div class="col-lg-8 col-md-10 col-md-offset-2 mx-auto col-xs-12">
 
             <div class="row">
                 {% for post in users_other_posts %}
-                <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="col-lg-4 col-md-6 col-sm-6">
                     {% include 'posts/snippets/blog_box_display.html' with obj=post%}
         </div>
         {% endfor %}
-            </div>
             {% endif %}
         </div>
     </div>

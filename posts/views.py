@@ -27,7 +27,6 @@ from comments.models import Comment
 
 class ExplorePostListView(UserPassesTestMixin, ListView):
     template_name = "posts/explore.html"
-    paginate_by = 1
 
     def test_func(self):
         if self.request.user.is_authenticated:
@@ -59,7 +58,6 @@ class PostDetailView(UserPassesTestMixin, DetailView):
         if self.request.user.is_authenticated:
             return not self.request.user.is_staff
         return True
-
 
     def handle_no_permission(self):
         return redirect('myadmin:admin-dashboard')
@@ -118,20 +116,16 @@ class PostDetailView(UserPassesTestMixin, DetailView):
         return context
 
 
-class PostCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
+class PostCreateView(LoginRequiredMixin,  CreateView):
     model = Post
     fields = ['title', 'content', 'draft', 'anonymous', 'image', 'tags']
     template_name = "posts/post-create-form.html"
 
     def form_valid(self, form):
+        if self.request.user.is_staff:
+            return redirect("myadmin:admin-dashboard")
         form.instance.author = self.request.user.profile
         return super().form_valid(form)
-
-    def test_func(self):
-        return not self.request.user.is_staff
-
-    def handle_no_permission(self):
-        return redirect('myadmin:admin-dashboard')
 
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
@@ -172,7 +166,6 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 class UserFollowingFeedListView(UserPassesTestMixin, ListView):
     template_name = "posts/feed.html"
-    paginate_by = 1
 
     def get_queryset(self):
         request = self.request

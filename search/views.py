@@ -11,7 +11,6 @@ from posts.models import Post
 
 class SearchPostListView(UserPassesTestMixin, ListView):
     template_name = "search/search-view.html"
-    paginate_by = 1
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -24,7 +23,7 @@ class SearchPostListView(UserPassesTestMixin, ListView):
         request = self.request
         query = request.GET.get('q', None)
         if query is not None and query != '':
-            return Post.objects.search(query)
+            return Post.objects.search(query).distinct()
         return Post.objects.none()
 
     def test_func(self):

@@ -95,7 +95,7 @@ class PostManager(models.Manager):
 class Post(models.Model):
     author = models.ForeignKey(Profile,
                                on_delete=models.CASCADE)
-    title = models.CharField(max_length=120)
+    title = models.CharField(max_length=80)
     slug = models.SlugField(unique=True, blank=True, null=True)
     content = RichTextField()
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
