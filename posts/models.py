@@ -66,7 +66,7 @@ class PostQuerySet(models.query.QuerySet):
                 query = or_query
             else:
                 query = query | or_query
-        return self.filter(query).distinct()
+        return self.filter(query)
 
         # return self.get_queryset().active().search(query_string)
 
