@@ -22,7 +22,7 @@
       {% if user.profile.image %}
       <img src="{{user.profile.image.url}}" alt="image description" class="img-fluid">
       {% endif %}
-      <h3 class="name">{{user.username}}</h3>
+      <h3 class="name">{{user.profile.bio}}</h3>
       <span class="bio">Bio Here</span>
     </div>
 
