@@ -11,9 +11,11 @@ from django.contrib.auth.mixins import (
     LoginRequiredMixin,
     UserPassesTestMixin
 )
+from django.shortcuts import redirect
 from django.http import HttpResponseRedirect
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.decorators import login_required
+from myadmin.decorators import user_only
 import json
 
 # Internal Import
@@ -23,9 +25,16 @@ from comments.forms import CommentForm
 from comments.models import Comment
 
 
-class ExplorePostListView(ListView):
+class ExplorePostListView(UserPassesTestMixin, ListView):
     template_name = "posts/explore.html"
     paginate_by = 1
+
+    def test_func(self):
+        if self.request.user.is_authenticated:
+            return not self.request.user.is_staff
+
+    def handle_no_permission(self):
+        return redirect('myadmin:admin-dashboard')
 
     def get_queryset(self):
         request = self.request
@@ -40,10 +49,17 @@ class ExplorePostListView(ListView):
         return context
 
 
-class PostDetailView(DetailView):
+class PostDetailView(UserPassesTestMixin, DetailView):
     queryset = Post.objects.all()
     template_name = "posts/post-detail.html"
     slug_url_kwarg = 'slug'
+
+    def test_func(self):
+        if self.request.user.is_authenticated:
+            return not self.request.user.is_staff
+
+    def handle_no_permission(self):
+        return redirect('myadmin:admin-dashboard')
 
     def post(self, *args, **kwargs):
         comment_form = CommentForm(self.request.POST)
@@ -96,7 +112,7 @@ class PostDetailView(DetailView):
         return context
 
 
-class PostCreateView(LoginRequiredMixin, CreateView):
+class PostCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Post
     fields = ['title', 'content', 'draft', 'anonymous', 'image', 'tags']
     template_name = "posts/post-create-form.html"
@@ -104,6 +120,12 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user.profile
         return super().form_valid(form)
+
+    def test_func(self):
+        return not self.request.user.is_staff
+
+    def handle_no_permission(self):
+        return redirect('myadmin:admin-dashboard')
 
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
@@ -114,16 +136,18 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     def get_queryset(self):
         return Post.objects.foradmin()
 
-
     def form_valid(self, form):
         form.instance.author = self.request.user.profile
         return super().form_valid(form)
 
     def test_func(self):
         post = self.get_object()
-        if self.request.user == post.author.user or self.request.user.is_staff:
+        if self.request.user == post.author.user:
             return True
         return False
+
+    def handle_no_permission(self):
+        return redirect('home:home-page')
 
 
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
@@ -132,12 +156,15 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def test_func(self):
         post = self.get_object()
-        if self.request.user == post.author.user or self.request.user.is_staff:
+        if self.request.user == post.author.user:
             return True
         return False
 
+    def handle_no_permission(self):
+        return redirect('home:home-page')
 
-class UserFollowingFeedListView(ListView):
+
+class UserFollowingFeedListView(UserPassesTestMixin, ListView):
     template_name = "posts/feed.html"
     paginate_by = 1
 
@@ -159,9 +186,19 @@ class UserFollowingFeedListView(ListView):
         context['featured_post'] = featured_post
         return context
 
+    def test_func(self):
+        return not self.request.user.is_staff
+
+    def handle_no_permission(self):
+        return redirect('myadmin:admin-dashboard')
+
 
 @login_required
+@user_only
 def post_like_toggle(request, slug):
+    if request.user.is_staff:
+        return HttpResponse("Forbidden")
+
     current_user_profile = request.user.profile
     post = Post.objects.get(slug=slug)
 

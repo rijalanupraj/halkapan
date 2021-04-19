@@ -1,6 +1,7 @@
 # External Import
 from comments.models import Comment
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.views.generic import (
     ListView,
     DetailView,
@@ -59,14 +60,14 @@ def create_user(request):
             user = u_form.save(commit=False)
             user.set_password(password)
             user.save()
-            return redirect('/myadmin/users')
+            return redirect('myadmin:users-list')
     context = {
         'u_form': u_form,
     }
     return render(request, 'myadmin/create-user-form.html', context)
 
 
-class UserListView(ListView, UserPassesTestMixin, LoginRequiredMixin):
+class UserListView(UserPassesTestMixin, LoginRequiredMixin, ListView):
     template_name = "myadmin/admin-users-view.html"
 
     def get_queryset(self):
@@ -89,7 +90,7 @@ def update_user(request, username):
             user.set_password(password)
             p_form.save()
             user.save()
-            return redirect('/myadmin/users')
+            return redirect('myadmin:users-list')
     else:
         p_form = ProfileUpdateForm(instance=user.profile)
         u_form = UserUpdateForm(instance=user)
@@ -102,7 +103,7 @@ def update_user(request, username):
 def delete_user(request, username):
     user = UserModel.objects.get(username=username)
     user.delete()
-    return redirect('/myadmin/users')
+    return redirect('myadmin:users-list')
 
 
 @admin_only
@@ -110,7 +111,7 @@ def make_staff(request, username):
     user = UserModel.objects.get(username=username)
     user.is_staff = True
     user.save()
-    return redirect('/myadmin/users')
+    return redirect('myadmin:users-list')
 
 
 @admin_only
@@ -120,23 +121,25 @@ def make_normal_user(request, username):
     user.is_admin = False
     user.is_superuser = False
     user.save()
-    return redirect('/myadmin/users')
+    return redirect('myadmin:users-list')
 
 
-class AdminPostListView(ListView, PermissionRequiredMixin):
+class AdminPostListView(PermissionRequiredMixin, ListView):
     model = Post
-    permission_required = 'is_staff'
     template_name = "myadmin/admin-post-view.html"
 
     def get_queryset(self):
         return Post.objects.foradmin()
+
+    def test_func(self):
+        return self.request.user.is_staff or self.request.user.is_superuser
 
 
 @admin_only
 def delete_post(request, id):
     post = Post.objects.get(id=id)
     post.delete()
-    return redirect('/myadmin/posts')
+    return redirect('myadmin:posts-list')
 
 
 @admin_only
@@ -147,7 +150,7 @@ def update_post(request, id):
         if form.is_valid():
             form.save()
 
-            return redirect('/myadmin/posts')
+            return redirect('myadmin:posts-list')
     context = {
         'form': PostForm(instance=product)
     }
@@ -159,7 +162,7 @@ def approve_post(self, id):
     post = Post.objects.get(id=id)
     post.active = True
     post.save()
-    return redirect('/myadmin/posts')
+    return redirect('myadmin:posts-list')
 
 
 @admin_only
@@ -167,13 +170,15 @@ def disapprove_post(self, id):
     post = Post.objects.get(id=id)
     post.active = False
     post.save()
-    return redirect('/myadmin/posts')
+    return redirect('myadmin:posts-list')
 
 
-class AdminCommentListView(ListView, PermissionRequiredMixin):
+class AdminCommentListView(PermissionRequiredMixin, ListView):
     model = Comment
-    permission_required = 'is_staff'
     template_name = "myadmin/admin-comment-view.html"
+
+    def test_func(self):
+        return self.request.user.is_staff or self.request.user.is_superuser
 
 
 @admin_only
@@ -184,7 +189,7 @@ def update_comment(request, id):
         if form.is_valid():
             form.save()
 
-            return redirect('/myadmin/comments')
+            return redirect('myadmin:comments-list')
     context = {
         'form': CommentAdminForm(instance=comment)
     }
@@ -195,7 +200,7 @@ def update_comment(request, id):
 def delete_comment(request, id):
     comment = Comment.objects.get(id=id)
     comment.delete()
-    return redirect('/myadmin/comments')
+    return redirect('mydamin:comments-list')
 
 
 @admin_only
@@ -204,7 +209,7 @@ def create_tag(request):
     if request.method == 'POST':
         if form.is_valid():
             form.save()
-            return redirect('/myadmin/tags')
+            return redirect('myadmin:tags-list')
     context = {
         'form': form
     }
@@ -228,7 +233,7 @@ def update_tag(request, id):
         if form.is_valid():
             form.save()
 
-            return redirect('/myadmin/tags')
+            return redirect('myadmin:tags-list')
     context = {
         'form': TagAdminForm(instance=tag)
     }
@@ -239,4 +244,4 @@ def update_tag(request, id):
 def delete_tag(request, id):
     tag = Tag.objects.get(id=id)
     tag.delete()
-    return redirect('/myadmin/tags')
+    return redirect('myadmin:tags-list')

@@ -31,7 +31,7 @@ Dashboard | HalkaPan
                             {% for object in object_list %}
                             <tr>
                                 <td>{{object.id}}</td>
-                                <td>{{object.title}}</td>
+                                <td>{{object.title|truncatechars:30}}</td>
                                 <td>{{object.author.user.username}}</td>
                                 <td>{% if object.active %}Active{% else %}Inactive{% endif %}</td>
 

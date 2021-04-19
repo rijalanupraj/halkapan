@@ -1,12 +1,15 @@
 # External Import
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import ListView
-
+from django.contrib.auth.mixins import (
+    LoginRequiredMixin,
+    UserPassesTestMixin
+)
 # Internal Import
 from posts.models import Post
 
 
-class SearchPostListView(ListView):
+class SearchPostListView(UserPassesTestMixin, ListView):
     template_name = "search/search-view.html"
     paginate_by = 1
 
@@ -23,3 +26,9 @@ class SearchPostListView(ListView):
         if query is not None and query != '':
             return Post.objects.search(query)
         return Post.objects.none()
+
+    def test_func(self):
+        return not self.request.user.is_staff
+
+    def handle_no_permission(self):
+        return redirect('myadmin:admin-dashboard')
