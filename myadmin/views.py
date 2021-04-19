@@ -124,7 +124,7 @@ def make_normal_user(request, username):
     return redirect('myadmin:users-list')
 
 
-class AdminPostListView(PermissionRequiredMixin, ListView):
+class AdminPostListView(UserPassesTestMixin, ListView):
     model = Post
     template_name = "myadmin/admin-post-view.html"
 

@@ -32,6 +32,7 @@ class ExplorePostListView(UserPassesTestMixin, ListView):
     def test_func(self):
         if self.request.user.is_authenticated:
             return not self.request.user.is_staff
+        return True
 
     def handle_no_permission(self):
         return redirect('myadmin:admin-dashboard')
@@ -57,6 +58,8 @@ class PostDetailView(UserPassesTestMixin, DetailView):
     def test_func(self):
         if self.request.user.is_authenticated:
             return not self.request.user.is_staff
+        return True
+
 
     def handle_no_permission(self):
         return redirect('myadmin:admin-dashboard')
@@ -105,10 +108,13 @@ class PostDetailView(UserPassesTestMixin, DetailView):
             "content_type": instance.get_content_type, "object_id": instance.id}
         comment_form = CommentForm(request.POST or None, initial=initial_data)
         comments = instance.comments
-        users_other_posts = Post.objects.all().order_by('?')[:3]
+        users_other_posts = []
+        if not instance.anonymous:
+            users_other_posts = Post.objects.all().filter(author=instance.author).exclude(
+                id=instance.id).filter(anonymous=False).distinct().order_by('?')[:3]
         context['comments'] = comments
         context['comment_form'] = comment_form
-        # context['users_other_posts'] = users_other_posts
+        context['users_other_posts'] = users_other_posts
         return context
 
 
@@ -176,7 +182,7 @@ class UserFollowingFeedListView(UserPassesTestMixin, ListView):
             users.append(current_user_profile)
             return Post.objects.all().filter(author__in=users).distinct()
         else:
-            return Post.objects.all().order_by('?')[:20]
+            return Post.objects.all().distinct().order_by('?')[:20]
 
     def get_context_data(self, *args, **kwargs):
         context = super(UserFollowingFeedListView,

@@ -48,25 +48,6 @@ class PostQuerySet(models.query.QuerySet):
     def draft(self):
         return self.filter(draft=True)
 
-    def search(self, query):
-        lookups = Q(title__icontains=query)
-        return self.filter(lookups).distinct()
-
-
-class PostManager(models.Manager):
-
-    def get_queryset(self):
-        return PostQuerySet(self.model, using=self._db)
-
-    def all(self):
-        return self.get_queryset().active()
-
-    def featured(self):
-        return self.get_queryset().featured()
-
-    def drafted(self):
-        return self.get_queryset().draft()
-
     def search(self, query_string):
 
         query = None
@@ -85,9 +66,27 @@ class PostManager(models.Manager):
                 query = or_query
             else:
                 query = query | or_query
-        return self.filter(query).active().filter(draft=False).distinct()
+        return self.filter(query).distinct()
 
         # return self.get_queryset().active().search(query_string)
+
+
+class PostManager(models.Manager):
+
+    def get_queryset(self):
+        return PostQuerySet(self.model, using=self._db)
+
+    def all(self):
+        return self.get_queryset().active()
+
+    def featured(self):
+        return self.get_queryset().featured()
+
+    def drafted(self):
+        return self.get_queryset().draft()
+
+    def search(self, query_string):
+        return self.get_queryset().search(query_string)
 
     def foradmin(self):
         return self.get_queryset().admin()

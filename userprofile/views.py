@@ -56,6 +56,9 @@ class AuthorDetailView(DetailView):
         author = User.objects.get(username=username)
         user_posts = Post.objects.all().filter(
             author__user__username=username).filter(anonymous=False).distinct()
+        if request.user.username == username:
+            user_posts = Post.objects.all().filter(
+            author__user__username=username).distinct()
         user_follows = False
         drafts = []
         if self.request.user.is_authenticated:

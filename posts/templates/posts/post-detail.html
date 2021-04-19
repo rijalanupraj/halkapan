@@ -6,6 +6,8 @@
 
 {% block additional_head %}
 <link rel="stylesheet" href="{% static 'posts/css/blog-detail.css' %}">
+<link rel="stylesheet" href="{% static 'posts/css/blog_box_display.css' %}">
+
 {% endblock %}
 
 {% block main_content %}
@@ -84,7 +86,7 @@
                 </div>
                 <div id="accordion">
 
-                <div class="card">
+                <div class="card my-5">
                     <div class="card-header text-center" id="CommentHideShow">
                       <h3 class="mb-0">
                         <button class="btn btn-secondary" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -103,8 +105,19 @@
 
                     </div>
                   </div>
-
             </div>
+        </div>
+            {% if users_other_posts %}
+        <div class="col-lg-8 col-md-10 col-md-offset-2 mx-auto col-xs-12">
+
+            <div class="row">
+                {% for post in users_other_posts %}
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    {% include 'posts/snippets/blog_box_display.html' with obj=post%}
+        </div>
+        {% endfor %}
+            </div>
+            {% endif %}
         </div>
     </div>
     {% endblock %}
