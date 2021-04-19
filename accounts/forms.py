@@ -3,6 +3,10 @@ from django.contrib.auth import get_user_model
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.core.exceptions import ValidationError
+from django.contrib import messages
+from django.urls import reverse
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
 
 User = get_user_model()
 
@@ -44,6 +48,10 @@ class LoginForm(AuthenticationForm):
 
     def confirm_login_allowed(self, user):
         if not user.is_active:
+            url = reverse("resend_verification")
+            URL = f"<a href='{url}'>Resend Verification URL</a>"
+            messages.error(
+                self.request, f'{URL}')
             raise ValidationError(
                 ("This account is inactive. Check your email"),
                 code='inactive',
