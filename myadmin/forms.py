@@ -8,6 +8,7 @@ from accounts.models import User
 from comments.models import Comment
 from tags.models import Tag
 
+
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
@@ -21,6 +22,11 @@ class ProfileUpdateForm(forms.ModelForm):
 
 
 class UserUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        exclude = ('last_login', 'groups', 'user_permissions', 'password')
+
+class UserCreateForm(forms.ModelForm):
     class Meta:
         model = User
         exclude = ('last_login', 'groups', 'user_permissions')

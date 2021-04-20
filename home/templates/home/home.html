@@ -15,7 +15,7 @@ HalkaPan
     <section id="hero">
         <div class="hero-container">
             <h1>Welcome to HalkaPan</h1>
-            <h2>Express Yourself - Write a bit long</h2>
+            <h2>Start Expressing Yourself</h2>
             <a href="{% url 'posts:post-create' %}" class="btn-get-started">Get Started</a>
         </div>
     </section><!-- End Hero Section -->
@@ -63,7 +63,7 @@ HalkaPan
         <div class="container p-5">
             <div class="section-header">
                 <h3 class="section-title">Popular Posts</h3>
-                <p class="section-description">Write</p>
+                <p class="section-description">Based On Reaction</p>
             </div>
             <div class="row">
                 {% for post in top_post %}
@@ -80,8 +80,8 @@ HalkaPan
         <div class="container">
             <div class="row">
                 <div class="col-lg-9 text-center text-lg-left">
-                    <h3 class="cta-title">Express Yourself</h3>
-                    <p class="cta-text">Write Something about express</p>
+                    <h3 class="cta-title">Start Your Journey</h3>
+                    <p class="cta-text">Get Out of Your Head & Start Expressing Yourself</p>
                 </div>
                 <div class="col-lg-3 cta-btn-container text-center">
                     <a class="cta-btn align-middle" href="{% url 'posts:post-create' %}">Express</a>
@@ -117,7 +117,7 @@ HalkaPan
         <div class="container">
             <div class="section-header">
                 <h3 class="section-title">Popular Authors</h3>
-                <p class="section-description">Write Something about Authors</p>
+                <p class="section-description">Based on Post and Reaction</p>
             </div>
             <div class="row">
                 {% for profile in user_profiles %}

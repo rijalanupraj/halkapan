@@ -10,4 +10,14 @@
     crossorigin="anonymous"></script>
 
 <!-- Own Css -->
+<script>
+    // For Messages Alert
+function myAlertBottom() {
+    $(".myAlert-bottom").show();
+    setTimeout(function () {
+        $(".myAlert-bottom").hide();
+    }, 5000);
+  }
+  myAlertBottom();
+</script>
 <script src="{% static 'myadmin/js/main-script.js' %}"></script>

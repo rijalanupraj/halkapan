@@ -125,3 +125,14 @@ body {
     margin-left: 5rem;
   }
 }
+
+/* For Django Alert */
+.myAlert-bottom {
+  z-index: 100;
+  position: fixed;
+  bottom: 5px;
+}
+
+.myAlert-bottom.alert {
+  display: none;
+}

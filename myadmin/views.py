@@ -14,7 +14,7 @@ from django.contrib.auth.mixins import (
     UserPassesTestMixin,
 )
 from django.contrib.auth.mixins import PermissionRequiredMixin
-
+from django.contrib import messages
 from django.contrib.auth import get_user_model
 from .forms import *
 from tags.models import Tag
@@ -53,13 +53,15 @@ def dashboard(request):
 
 @admin_only
 def create_user(request):
-    u_form = UserUpdateForm(request.POST or None)
+    u_form = UserCreateForm(request.POST or None)
     if request.method == 'POST':
         if u_form.is_valid():
             password = u_form.cleaned_data['password']
             user = u_form.save(commit=False)
             user.set_password(password)
             user.save()
+            messages.success(
+                    request, f'{user.username}User Created')
             return redirect('myadmin:users-list')
     context = {
         'u_form': u_form,
@@ -99,11 +101,14 @@ def update_user(request, username):
             request.POST, request.FILES, instance=user.profile)
         u_form = UserUpdateForm(request.POST, instance=user)
         if p_form.is_valid() and u_form.is_valid():
-            password = u_form.cleaned_data['password']
-            user = u_form.save(commit=False)
-            user.set_password(password)
+            # password = u_form.cleaned_data['password']
+            # user = u_form.save(commit=False)
+            # user.set_password(password)
+            u_form.save()
             p_form.save()
-            user.save()
+            # user.save()
+            messages.success(
+                    request, f'{user.username} User Updated')
             return redirect('myadmin:users-list')
     else:
         p_form = ProfileUpdateForm(instance=user.profile)
@@ -117,6 +122,8 @@ def update_user(request, username):
 def delete_user(request, username):
     user = UserModel.objects.get(username=username)
     user.delete()
+    messages.success(
+                    request, f'{user.username} User Deleted')
     return redirect('myadmin:users-list')
 
 
@@ -125,6 +132,8 @@ def make_staff(request, username):
     user = UserModel.objects.get(username=username)
     user.is_staff = True
     user.save()
+    messages.success(
+                    request, f'{user.username} Promoted To Staff')
     return redirect('myadmin:users-list')
 
 
@@ -135,6 +144,8 @@ def make_normal_user(request, username):
     user.is_admin = False
     user.is_superuser = False
     user.save()
+    messages.success(
+                    request, f'{user.username} Demoted To Normal User')
     return redirect('myadmin:users-list')
 
 
@@ -166,6 +177,8 @@ class AdminPostListView(UserPassesTestMixin, ListView):
 def delete_post(request, id):
     post = Post.objects.get(id=id)
     post.delete()
+    messages.success(
+                    request, f'Post Deleted')
     return redirect('myadmin:posts-list')
 
 
@@ -176,7 +189,8 @@ def update_post(request, id):
         form = PostForm(request.POST, request.FILES, instance=product)
         if form.is_valid():
             form.save()
-
+            messages.success(
+                    request, f'Post Updated')
             return redirect('myadmin:posts-list')
     context = {
         'form': PostForm(instance=product)
@@ -189,6 +203,8 @@ def approve_post(self, id):
     post = Post.objects.get(id=id)
     post.active = True
     post.save()
+    messages.success(
+                    self.request, f'Post Approved')
     return redirect('myadmin:posts-list')
 
 
@@ -197,6 +213,8 @@ def disapprove_post(self, id):
     post = Post.objects.get(id=id)
     post.active = False
     post.save()
+    messages.success(
+                    self.request, f'Post Hidden')
     return redirect('myadmin:posts-list')
 
 
@@ -232,6 +250,8 @@ def update_comment(request, id):
         form = CommentAdminForm(request.POST, request.FILES, instance=comment)
         if form.is_valid():
             form.save()
+            messages.success(
+                    request, f'Comment Updated')
 
             return redirect('myadmin:comments-list')
     context = {
@@ -244,6 +264,8 @@ def update_comment(request, id):
 def delete_comment(request, id):
     comment = Comment.objects.get(id=id)
     comment.delete()
+    messages.success(
+                    request, f'Comment Deleted')
     return redirect('mydamin:comments-list')
 
 
@@ -253,6 +275,8 @@ def create_tag(request):
     if request.method == 'POST':
         if form.is_valid():
             form.save()
+            messages.success(
+                    request, f'Tag Created')
             return redirect('myadmin:tags-list')
     context = {
         'form': form
@@ -301,7 +325,8 @@ def update_tag(request, id):
         form = TagAdminForm(request.POST, request.FILES, instance=tag)
         if form.is_valid():
             form.save()
-
+            messages.success(
+                    request, f'Tag Updated')
             return redirect('myadmin:tags-list')
     context = {
         'form': TagAdminForm(instance=tag)
@@ -313,6 +338,8 @@ def update_tag(request, id):
 def delete_tag(request, id):
     tag = Tag.objects.get(id=id)
     tag.delete()
+    messages.success(
+                    request, f'Tag Deleted')
     return redirect('myadmin:tags-list')
 
 
