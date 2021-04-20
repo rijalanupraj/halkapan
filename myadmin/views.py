@@ -264,7 +264,7 @@ def delete_comment(request, id):
     comment.delete()
     messages.success(
                     request, f'Comment Deleted')
-    return redirect('mydamin:comments-list')
+    return redirect('myadmin:comments-list')
 
 
 @admin_only

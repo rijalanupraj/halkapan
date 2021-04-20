@@ -23,7 +23,7 @@ class SearchPostListView(UserPassesTestMixin, ListView):
         request = self.request
         query = request.GET.get('q', None)
         if query is not None and query != '':
-            return Post.objects.search(query).distinct()
+            return Post.objects.search(query).active().distinct()
         return Post.objects.none()
 
     def test_func(self):
