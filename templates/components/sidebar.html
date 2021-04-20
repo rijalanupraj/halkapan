@@ -9,6 +9,7 @@
 {% url 'posts:post-create' as post_create_url %}
 {% url 'change_password' as change_password_url %}
 {% url 'password_reset' as password_reset_url %}
+{% url 'userprofile:list-all-user' as list_all_users %}
 {% url 'userprofile:author-profile-page' user.username as user_profile_page %}
 <aside class="sidebar">
   <div class="toggle">
@@ -55,6 +56,8 @@
               class="fas fa-eye mr-3"></span>Explore</a></li>
         <li class="{% if request.path == search_query_url %}active{% endif %}"><a href="{{search_query_url}}"><span
               class="fas fa-search mr-3"></span>Search</a></li>
+        <li class="{% if request.path == list_all_users %}active{% endif %}"><a href="{{list_all_users}}"><span
+              class="fas fa-users mr-3"></span>All Users</a></li>
         {% if not user.is_authenticated %}
         <li class="{% if request.path == login_url %}active{% endif %}"><a href="{{login_url}}"><span
               class="fas fa-key mr-3"></span>Login</a></li>

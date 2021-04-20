@@ -89,7 +89,7 @@ class UserListView(UserPassesTestMixin, LoginRequiredMixin, ListView):
         userQuerySet = UserModel.objects.all()
         if query and query != '':
             userQuerySet = userQuerySet.filter(
-                username__icontains=query)
+                username__icontains=query).distinc()
         return userQuerySet
 
 
@@ -169,7 +169,7 @@ class AdminPostListView(UserPassesTestMixin, ListView):
         query = method_dict.get('q', None)
         postQuerySet = Post.objects.foradmin()
         if query and query != '':
-            return Post.objects.search(query)
+            return Post.objects.search(query).distinct()
         return postQuerySet
 
 
@@ -239,7 +239,7 @@ class AdminCommentListView(UserPassesTestMixin, ListView):
         QuerySet = Comment.objects.all()
         if query and query != '':
             QuerySet = QuerySet.filter(
-                content__icontains=query)
+                content__icontains=query).distinct()
         return QuerySet
 
 
@@ -305,7 +305,7 @@ class AdminTagListView(UserPassesTestMixin, ListView):
         QuerySet = Tag.objects.all()
         if query and query != '':
             QuerySet = QuerySet.filter(
-                title__icontains=query)
+                title__icontains=query).distinct()
         return QuerySet
 
 
