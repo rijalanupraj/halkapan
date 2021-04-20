@@ -17,7 +17,7 @@ Users | HalkaPan
                 <a class="profile-username text-center"
                     href="{% url 'userprofile:author-profile-page' profile.user.username %}">{{profile.user.username}}</a>
 
-                <p class="text-muted text-center">Bio Here</p>
+                <p class="text-muted text-center">{{profile.bio}}</p>
 
                 <ul class="list-group list-group-unbordered">
                     <li class="list-group-item">

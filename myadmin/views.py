@@ -89,7 +89,7 @@ class UserListView(UserPassesTestMixin, LoginRequiredMixin, ListView):
         userQuerySet = UserModel.objects.all()
         if query and query != '':
             userQuerySet = userQuerySet.filter(
-                username__icontains=query).distinc()
+                username__icontains=query).distinct()
         return userQuerySet
 
 
@@ -199,22 +199,20 @@ def update_post(request, id):
 
 
 @admin_only
-def approve_post(self, id):
+def approve_post(request, id):
     post = Post.objects.get(id=id)
     post.active = True
     post.save()
-    messages.success(
-                    self.request, f'Post Approved')
+    messages.success(request, f'Post Approved')
     return redirect('myadmin:posts-list')
 
 
 @admin_only
-def disapprove_post(self, id):
+def disapprove_post(request, id):
     post = Post.objects.get(id=id)
     post.active = False
     post.save()
-    messages.success(
-                    self.request, f'Post Hidden')
+    messages.success(request, f'Post Hidden')
     return redirect('myadmin:posts-list')
 
 
