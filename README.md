@@ -1,6 +1,6 @@
 # HalkaPan
 
-  Halkapan is a website where you can express your feelings,confession, thoughts, desire  in a form of blog and reach out large number of audition and get their love and feedback.*
+  *Halkapan is a website where you can express your feelings,confession, thoughts, desire  in a form of blog and reach out large number of audition and get their love and feedback.*
 
 ![Home Page 1](extras/images/homepage-1.png)
 
