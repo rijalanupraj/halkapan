@@ -2,6 +2,8 @@
 
   *Halkapan is a website where you can express your feelings,confession, thoughts, desire  in a form of blog and reach out large number of audition and get their love and feedback.*
 
+Video URL : [Short Presentation](https://youtu.be/-Uu4BNHXKTE/)
+
 ![Home Page 1](extras/images/homepage-1.png)
 
 ## Features
@@ -14,10 +16,6 @@ Some of the important features of the system are as follows:
 * Users react and comment on post.
 * Tags can be assigned to the post.
 * Admin User can perform all action through admin dashboard
-
-`
-Video URL : <https://youtu.be/-Uu4BNHXKTE>
-`
 
 ## Getting Started
 
@@ -34,6 +32,7 @@ Video URL : <https://youtu.be/-Uu4BNHXKTE>
 4. CSS
 5. JS
 6. AJAX
+7. MySql
 
 ## Screenshots
 
@@ -80,3 +79,5 @@ Video URL : <https://youtu.be/-Uu4BNHXKTE>
 ![Post Detail 1](extras/images/postdetail-1.png)
 ![Post Detail 2](extras/images/postdetail-2.png)
 ![Post Detail 3](extras/images/postdetail-3.png)
+
+Special Thanks To: Pradip Kandel & Aakash Karmacharya
