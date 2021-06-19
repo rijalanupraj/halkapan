@@ -80,4 +80,12 @@ Some of the important features of the system are as follows:
 ![Post Detail 2](extras/images/postdetail-2.png)
 ![Post Detail 3](extras/images/postdetail-3.png)
 
+### Admin Dashboard
+
+![Admin Dashboard](extras/images/admin-dashboard.png)
+![Admin Posts](extras/images/admin-posts.png)
+![Admin Authors](extras/images/admin-authors.png)
+![Admin Tags](extras/images/admin-tags.png)
+![Admin admin-users](extras/images/admin-users.png)
+
 Special Thanks To: Pradip Kandel & Aakash Karmacharya
